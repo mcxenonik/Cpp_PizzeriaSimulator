@@ -19,7 +19,7 @@ class Menu:
 
 
     def _creatMenu(self):
-        with open("products_data.json") as file:
+        with open("simulation_prototype\\products_data.json") as file:
             textMenu = json.load(file)
 
         for product in textMenu:
