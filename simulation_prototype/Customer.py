@@ -56,7 +56,7 @@ class Customer(Person):
         self._eatTime += eatTime_to_add
 
 
-    def decreaseEatTime(self):
+    def _decreaseEatTime(self):
         self._eatTime -= 1
 
 
@@ -115,7 +115,7 @@ class Customer(Person):
 
 
     def zjedz(self):
-        self.decreaseEatTime()
+        self._decreaseEatTime()
 
 
     def popros_o_rachunek(self, sim_pizzeria):

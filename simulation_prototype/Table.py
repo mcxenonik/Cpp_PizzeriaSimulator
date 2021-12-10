@@ -39,5 +39,7 @@ class Table:
 
     def deleteCustomerFromTable(self, customerID):
         self._customersIDList.remove(customerID)
-        self._groupID = None
         self._isFull = False
+
+        if (len(self._customersIDList) == 0):
+            self._groupID = None
