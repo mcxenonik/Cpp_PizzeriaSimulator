@@ -1,0 +1,44 @@
+{
+	"Margarita": {
+		"name": "Margarita",
+		"type": "Pizza",
+		"price": "25",
+		"prepareTime": "6",
+		"eatingTime": "4"
+	},
+	"Classica": {
+		"name": "Classica",
+		"type": "Pizza",
+		"price": "20",
+		"prepareTime": "5",
+		"eatingTime": "3"
+	},
+	"Americana": {
+		"name": "Americana",
+		"type": "Pizza",
+		"price": "30",
+		"prepareTime": "7",
+		"eatingTime": "5"
+	},
+	"Pepperoni": {
+		"name": "Pepperoni",
+		"type": "Pizza",
+		"price": "20",
+		"prepareTime": "3",
+		"eatingTime": "2"
+	},
+	"Cola": {
+		"name": "Cola",
+		"type": "Drink",
+		"price": "10",
+		"prepareTime": "0",
+		"drinkingTime": "2"
+	},
+	"Water": {
+		"name": "Water",
+		"type": "Drink",
+		"price": "5",
+		"prepareTime": "0",
+		"drinkingTime": "1"
+	}
+}
