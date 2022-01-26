@@ -15,7 +15,7 @@ class Order
         bool isPaid;
         int waitTime;
         std::list<Product*> productList;
-        Receipt *receipt = nullptr;
+        Receipt *receipt;
         void setWaitTime();
     public:
         Order(int new_id, int new_customerID, int new_waiterID, std::list<Product*> new_productList);
@@ -27,7 +27,7 @@ class Order
         bool getIsPaid();
         std::list<Product*> getProductList();
         int getWaitTime();
-        Receipt getReceipt();
+        Receipt* getReceipt();
         void setPaid();
         void createReceipt();
         void setIsDelivered(bool isDelivered);

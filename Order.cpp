@@ -55,9 +55,9 @@ int Order::getWaitTime()
     return waitTime;
 }
 
-Receipt Order::getReceipt()
+Receipt* Order::getReceipt()
 {
-    return *receipt;
+    return receipt;
 }
 
 void Order::setPaid()

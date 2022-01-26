@@ -5,7 +5,7 @@ Table::Table(int new_id, unsigned int new_size)
     ID = new_id;
     size = new_size;
     isFull = false;
-    groupID = nullptr;
+    groupID = NULL;
 }
 
 int Table::getID()
@@ -37,7 +37,7 @@ void Table::addCustomerToTable(int customerID, int customerGroupID)
 {
     customersIDList.push_back(customerID);
 
-    if (groupID == nullptr)
+    if (groupID == NULL)
     {
         groupID = new int;
         *groupID = customerGroupID;
@@ -56,7 +56,7 @@ void Table::deleteCustomerFromTable(int customerID)
 
     if (customersIDList.size() == 0)
     {
-        groupID = nullptr;
+        groupID = NULL;
     }
 }
 

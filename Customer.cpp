@@ -64,7 +64,7 @@ bool Customer::takeTable(Pizzeria *simulated_pizzeria)
 {
     for(auto table_ptr : simulated_pizzeria -> getTableList())
     {
-        if (table_ptr -> getGroupID() == groupID and not table_ptr -> isFull())
+        if (table_ptr -> getGroupID() == groupID && !table_ptr -> getIsFull())
         {
             table_ptr -> addCustomerToTable(ID, groupID);
             tableID = table_ptr -> getID();
@@ -74,7 +74,7 @@ bool Customer::takeTable(Pizzeria *simulated_pizzeria)
 
     for(auto table_ptr : simulated_pizzeria -> getTableList())
     {
-        if (table_ptr -> getGroupID() == nullptr)
+        if (table_ptr -> getGroupID() == NULL)
         {
             table_ptr -> addCustomerToTable(ID, groupID);
             tableID = table_ptr -> getID();
