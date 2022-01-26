@@ -1,7 +1,7 @@
 #ifndef RECEIPT_H
 #define RECEIPT_H
 
-#include <list>
+#include <vector>
 #include "Product.h"
 
 class Receipt
@@ -10,12 +10,12 @@ class Receipt
         int ID;
         int orderID;
         bool isPaid;
-        std::list<Product*> productList;
+        std::vector<Product*> productList;
         int totalPrice;
 
         void countPrice();
     public:
-        Receipt(int new_orderID, std::list<Product*> new_productList);
+        Receipt(int new_orderID, std::vector<Product*> new_productList);
         int getID();
         int getOrderID();
         bool getIsPaid();

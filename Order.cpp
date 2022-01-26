@@ -1,7 +1,6 @@
 #include "Order.h"
 
-
-Order::Order(int new_id, int new_customerID, int new_waiterID, std::list<Product*> new_productList)
+Order::Order(int new_id, int new_customerID, int new_waiterID, std::vector<Product*> new_productList)
 {
     ID = new_id;
     customerID = new_customerID;
@@ -10,7 +9,12 @@ Order::Order(int new_id, int new_customerID, int new_waiterID, std::list<Product
     isDelivered = false;
     isPaid = false;
     waitTime = 0;
-    productList  = new_productList;
+    // productList  = new_productList;
+
+    for (auto product_ptr : new_productList)
+    {
+        productList.push_back(product_ptr);
+    }
 
     setWaitTime();
 }

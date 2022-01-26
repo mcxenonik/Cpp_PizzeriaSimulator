@@ -51,7 +51,7 @@ void Waiter::doTask(Pizzeria *sim_pizzeria)
         {
             sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::SO);
 
-            printLog(taskType, customerId);
+            printLog(taskType, customerId, 0);
             break;
         }
         case TaskTypes::CO:
@@ -104,7 +104,7 @@ void Waiter::doTask(Pizzeria *sim_pizzeria)
 
 }
 
-void Waiter::printLog(TaskTypes taskType, int customerId=0, int orderID=0)
+void Waiter::printLog(TaskTypes taskType, int customerId, int orderID)
 {       
     switch(taskType)
     {

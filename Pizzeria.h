@@ -1,9 +1,14 @@
+#ifndef PIZZERIA_H
+#define PIZZERIA_H
+
 #include "Waiter.h"
 #include "Customer.h"
 #include "Table.h"
 #include "Order.h"
 #include "Menu.h"
+
 #include <vector>
+
 class Pizzeria
 {
     private:
@@ -16,7 +21,7 @@ class Pizzeria
     public:
         Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers);
 
-        std::vector<Waiter*> getWaitersList();
+        std::vector<Waiter*> getWaiterList();
         std::vector<Customer*> getCustomerList();
         std::vector<Table*> getTableList();
         std::vector<Order*> getOrdersList();
@@ -36,3 +41,5 @@ class Pizzeria
         int findMinTaskWaiter();
 
 };
+
+#endif

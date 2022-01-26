@@ -112,7 +112,9 @@ void Customer::submitOrder(Pizzeria *simulated_pizzeria)
     std::vector<Product*> productList = simulated_pizzeria -> getMenu() -> getProductList();
 
     std::vector<Product*> orderedProductsList;
-    std::sample(productList.begin(), productList.end(), std::back_inserter(orderedProductsList), 2, std::mt19937{std::random_device{}()});
+    orderedProductsList.push_back(productList[0]);
+    orderedProductsList.push_back(productList[1]);
+    // std::sample(productList.begin(), productList.end(), std::back_inserter(orderedProductsList), 2, std::mt19937{std::random_device{}()});
 
     eatTime = orderedProductsList[0] -> getEatingTime() + orderedProductsList[1] -> getEatingTime();
     

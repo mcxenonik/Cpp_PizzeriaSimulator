@@ -1,6 +1,91 @@
+#include "CustomerStates.h"
+#include "Pizzeria.h"
+
+#include <vector>
+#include <algorithm>
+#include <unistd.h>
+
+// def formatTime(startTime, minutes):
+//     if (minutes >= 60):
+//         minutes -= 60
+//         startTime += 1
+
+//     if (len(str(minutes)) == 1):
+//         min = "0" + str(minutes)
+//         hour = str(startTime)
+//     else:
+//         min = str(minutes)
+//         hour = str(startTime)
+
+//     return hour, min, startTime, minutes
 
 int main()
 {
+    int numOfTables = 5;
+    int numOfWaiters = 4;
+    int numOfCustomers = 30;
 
+    // come_times = [(8, 4), (8, 8), (8, 12), (8, 18), (8, 30), (8, 32), (8, 34), (8, 40), (8, 46), (8, 50)];
+
+    int startTime = 8;
+    int minutes = 0;
+    int step = 2;
+
+    bool run_sim = true;
+    std::vector<int> end_list;
+
+    Pizzeria *sim_pizzeria = new Pizzeria(numOfTables, numOfWaiters, numOfCustomers);
+
+    std::cout << "START:" << startTime << ":" << minutes << std::endl;
+
+    while(run_sim)
+    {
+        if (end_list.size() == sim_pizzeria -> getCustomerList().size())
+        {
+            run_sim = false;
+        }
+
+        // if ((startTime, minutes) in come_times)
+        // {
+        //     sim_pizzeria.addCustomer()
+        //     print("PRZYCHODZI NOWY KLIENT:", sim_pizzeria.getCustomersList()[-1].getID(), "Z GRUPY:", sim_pizzeria.getCustomersList()[-1].getGroupID())
+        // }
+
+        for (auto customer_ptr : sim_pizzeria -> getCustomerList())
+        {
+            customer_ptr -> doAction(sim_pizzeria);
+
+            if(customer_ptr -> getState() == CustomerStates::OUT && std::find(end_list.begin(), end_list.end(), customer_ptr -> getID()) == end_list.end())
+            {
+                end_list.push_back(customer_ptr -> getID());
+            }
+        }
+
+        std::cout << "----------------------------------------------------------------------------------------" << std::endl;
+
+        for (auto waiter_ptr : sim_pizzeria -> getWaiterList())
+        {
+            waiter_ptr -> doTask(sim_pizzeria);
+        }
+
+        sim_pizzeria -> decreaseOrdersTime();
+
+        minutes += step;
+        // hour, min, startTime, minutes = formatTime(startTime, minutes)
+        std::cout << "========================================================================================" << std::endl;
+        // std::cout << "CZAS:" << hour << ":" << min << std::endl;
+        std::cout << "WYSZLO KLIENTOW:" << end_list.size() << std::endl;
+        std::cout << "========================================================================================" << std::endl;
+        if (!run_sim)
+        {
+            std::cout << "END SIMULATION" << std::endl;
+            // std::cout << "---STATYSTYKI---" << std::endl;
+            // std::cout << "ZAROBIONO:" << sim_pizzeria -> countMoney() << std::endl;
+            // std::cout << "---" << std::endl;
+            // sim_pizzeria -> countMinMaxCustomerWaitingTime();
+            // sim_pizzeria -> countMinMaxWaiterTasksDone();
+            // sim_pizzeria -> countMinMaxWaiterValueOfCollectedOrdersStat();
+        }
+        sleep(step);
+    };
 }
-    

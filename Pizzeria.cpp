@@ -1,6 +1,7 @@
 #include "Pizzeria.h"
 
-Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers){
+Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers)
+{
     menu = new Menu();
 
     for(int i=0; i<numOfTables; i++)
@@ -11,71 +12,71 @@ Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers){
     
     for(int i=0; i<numOfCustomers; i++)
         addCustomer();
-};
+}
 
-std::vector<Waiter*> Pizzeria::getWaitersList(){
+std::vector<Waiter*> Pizzeria::getWaiterList(){
     return waiterList;
-};
+}
 
 std::vector<Customer*> Pizzeria::getCustomerList(){
     return customerList;
-};
+}
 
 std::vector<Table*> Pizzeria::getTableList(){
     return tableList;
-};
+}
 
 std::vector<Order*> Pizzeria::getOrdersList(){
     return orderList;
-};
+}
 
 Menu* Pizzeria::getMenu(){
     return menu;
-};
+}
 
 Waiter* Pizzeria::getWaiterByID(int waiterID){
     return waiterList[waiterID];
-};
+}
 
 Customer* Pizzeria::getCustomerByID(int customerID){
     return customerList[customerID];
-};
+}
 
 Table* Pizzeria::getTableByID(int tableID){
     return tableList[tableID];
-};
+}
 
 Order* Pizzeria::getOrderByID(int orderID){
     return orderList[orderID];
-};
+}
 
 Product* Pizzeria::getProductByID(int productID){
     return menu->getProductByID(productID);
-};
+}
 
 void Pizzeria::addWaiter(){
     Waiter* new_waiter = new Waiter(waiterList.size(), "Stefan");
     waiterList.push_back(new_waiter);
-};
+}
 
 void Pizzeria::addCustomer(){
     Customer* new_customer = new Customer(customerList.size(), "Ania", rand() % 5);
 
     customerList.push_back(new_customer);
-};
+}
 
 void Pizzeria::addTable(){
     Table* new_table = new Table(tableList.size(), (rand() % 5) + 1);
 
     tableList.push_back(new_table);
-};
+}
 
 int Pizzeria::addOrder(int customerID, int waiterID, std::vector<Product*> productList){
     Order* new_order = new Order(orderList.size(), customerID, waiterID, productList);
     orderList.push_back(new_order);
 
     return new_order->getID();
-};
+}
 
 void Pizzeria::decreaseOrdersTime(){
     std::cout << "****************************************************************************************";
@@ -102,7 +103,7 @@ void Pizzeria::decreaseOrdersTime(){
     }
     std::cout << "****************************************************************************************";
 
-};
+}
 
 int Pizzeria::findMinTaskWaiter(){
     int min_tasks = waiterList[0]->getNumberOfTasks();
@@ -115,4 +116,4 @@ int Pizzeria::findMinTaskWaiter(){
         }
     }
     return waiterID;
-};
+}

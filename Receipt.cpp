@@ -1,12 +1,13 @@
 
 #include "Receipt.h"
 
-Receipt::Receipt(int new_orderID, std::list<Product*> new_productList)
+Receipt::Receipt(int new_orderID, std::vector<Product*> new_productList)
 {
     ID = new_orderID;
     orderID = new_orderID;
     isPaid = false;    
     totalPrice = 0;
+    
     for (auto product_ptr : new_productList)
     {
         productList.push_back(product_ptr);
