@@ -1,3 +1,6 @@
+#ifndef TASK_H
+#define TASK_H
+
 #include "TaskTypes.h"
 #include "TaskPayload.h"
 
@@ -16,6 +19,8 @@ class Task
         int getCustomerID();
         TaskTypes getTaskType();
         TaskPayload getTaskPayload();
-        
+
         ~Task();
 };
+
+#endif

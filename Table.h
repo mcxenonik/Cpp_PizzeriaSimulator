@@ -1,3 +1,6 @@
+#ifndef TABLE_H
+#define TABLE_H
+
 #include <list>
 
 class Table
@@ -20,3 +23,5 @@ class Table
         void deleteCustomerFromTable(int customerID);
         ~Table();
 };
+
+#endif

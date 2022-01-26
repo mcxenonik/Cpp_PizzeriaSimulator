@@ -3,7 +3,6 @@
 
 #include "Product.h"
 
-
 class Drink : public Product
 {
     private:

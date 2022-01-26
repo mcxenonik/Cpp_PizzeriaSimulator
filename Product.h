@@ -3,7 +3,6 @@
 
 #include "productInterface.h"
 
-
 class Product : public ProductInterface
 {
     protected: 

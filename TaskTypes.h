@@ -1,3 +1,6 @@
+#ifndef TASK_TYPES_H
+#define TASK_TYPES_H
+
 enum class TaskTypes
 {
     GM = 1,                  // Give menu
@@ -7,3 +10,5 @@ enum class TaskTypes
     TR = 5                   // Take receipt
 
 };
+
+#endif

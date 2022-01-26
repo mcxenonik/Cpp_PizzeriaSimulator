@@ -1,9 +1,7 @@
 #ifndef DISH_H
 #define DISH_H
 
-
 #include "Product.h"
-
 
 class Dish : public Product
 {
