@@ -45,7 +45,7 @@ bool Order::getIsPaid()
     return isPaid;
 }
 
-std::list<Product*> Order::getProductList()
+std::vector<Product*> Order::getProductList()
 {
     return productList;
 }

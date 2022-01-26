@@ -25,7 +25,7 @@ class Waiter : public Person
 
         int getNumberOfTasks();
         void addTask(Task *new_task);
-        void doTask(Pizzeria &simulated_pizzeria);
+        void doTask(Pizzeria *simulated_pizzeria);
         void printLog(TaskTypes taskType, int customerID, int orderID);
 
         ~Waiter();

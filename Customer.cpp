@@ -1,6 +1,5 @@
 #include "Customer.h"
 
-
 Customer::Customer(int new_id, std::string new_name, int new_groupID):
 Person(new_id, new_name)
 {

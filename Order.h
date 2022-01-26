@@ -2,7 +2,9 @@
 #define ORDER_H
 
 #include "Receipt.h"
+#include "Product.h"
 #include <iostream>
+#include <vector>
 
 class Order
 {
@@ -14,18 +16,18 @@ class Order
         bool isDelivered;
         bool isPaid;
         int waitTime;
-        std::list<Product*> productList;
+        std::vector<Product*> productList;
         Receipt *receipt;
         void setWaitTime();
     public:
-        Order(int new_id, int new_customerID, int new_waiterID, std::list<Product*> new_productList);
+        Order(int new_id, int new_customerID, int new_waiterID, std::vector<Product*> new_productList);
         int  getID();
         int getCustomerID();
         int getWaiterID();
         bool getIsReady();
         bool getIsDelivered();
         bool getIsPaid();
-        std::list<Product*> getProductList();
+        std::vector<Product*> getProductList();
         int getWaitTime();
         Receipt* getReceipt();
         void setPaid();

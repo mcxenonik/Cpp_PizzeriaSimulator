@@ -1,115 +1,118 @@
 #include "Pizzeria.h"
 
-class Pizzeria
-{
-    Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers){
-        menu = Menu();
+Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers){
+    menu = new Menu();
 
-        for(int i=0; i<numOfTables; i++)
-            addTable();
+    for(int i=0; i<numOfTables; i++)
+        addTable();
 
-        for(int i=0; i<numOfWaiters; i++)
-            addWaiter();
-        
-        for(int i=0; i<numOfCustomers; i++)
-            addCustomer();
-    };
+    for(int i=0; i<numOfWaiters; i++)
+        addWaiter();
+    
+    for(int i=0; i<numOfCustomers; i++)
+        addCustomer();
+};
 
-    std::vector<Waiter*> Pizzeria::getWaitersList(){
-        return waiterList;
-    };
+std::vector<Waiter*> Pizzeria::getWaitersList(){
+    return waiterList;
+};
 
-    std::vector<Customer*> Pizzeria::getCustomerList(){
-        return customerList;
-    };
+std::vector<Customer*> Pizzeria::getCustomerList(){
+    return customerList;
+};
 
-    std::vector<Table*> Pizzeria::getTableList(){
-        return tableList;
-    };
+std::vector<Table*> Pizzeria::getTableList(){
+    return tableList;
+};
 
-    std::vector<Order*> Pizzeria::getOrdersList(){
-        return ordersList;
-    };
+std::vector<Order*> Pizzeria::getOrdersList(){
+    return orderList;
+};
 
-    Menu* Pizzeria::getMenu(){
-        return menu;
-    };
+Menu* Pizzeria::getMenu(){
+    return menu;
+};
 
-    Waiter* Pizzeria::getWaiterByID(int waiterID){
-        return waitersList[waiterID];
-    };
+Waiter* Pizzeria::getWaiterByID(int waiterID){
+    return waiterList[waiterID];
+};
 
-    Customer* Pizzeria::getCustomerByID(int customerID){
-        return customersList[customerID];
-    };
+Customer* Pizzeria::getCustomerByID(int customerID){
+    return customerList[customerID];
+};
 
-    Table* Pizzeria::getTableByID(int tableID){
-        return tablesList[tableID];
-    };
+Table* Pizzeria::getTableByID(int tableID){
+    return tableList[tableID];
+};
 
-    Order* Pizzeria::getOrderByID(int orderID){
-        return ordersList[orderID];
-    };
+Order* Pizzeria::getOrderByID(int orderID){
+    return orderList[orderID];
+};
 
-    Product* Pizzeria::getProductByID(int productID){
-        return menu[productID];
-    };
+Product* Pizzeria::getProductByID(int productID){
+    return menu->getProductByID(productID);
+};
 
-    void Pizzeria::addWaiter(){
-        Waiter* new_waiter = Waiter(waitersList.length());
-        waitersList.append(new_waiter);
-    };
+void Pizzeria::addWaiter(){
+    Waiter* new_waiter = new Waiter(waiterList.size(), "Stefan");
+    waiterList.push_back(new_waiter);
+};
 
-    void Pizzeria::addCustomer(){
-        Customer* new_customer = Customer(customersList.length(), rand() % 5);
+void Pizzeria::addCustomer(){
+    Customer* new_customer = new Customer(customerList.size(), "Ania", rand() % 5);
 
-        customersList.append(new_customer);
-    };
+    customerList.push_back(new_customer);
+};
 
-    void Pizzeria::addTable(){
-        Table* new_table = Table(tablesList.length(), (rand() % 5) + 1);
+void Pizzeria::addTable(){
+    Table* new_table = new Table(tableList.size(), (rand() % 5) + 1);
 
-        tablesList.append(new_table);
-    };
+    tableList.push_back(new_table);
+};
 
-    int Pizzeria::addOrder(customerID, waiterID, productList){
-        Order* new_order = Order(ordersList.length(), customerID, waiterID, productList);
-        ordersList.append(new_order);
+int Pizzeria::addOrder(int customerID, int waiterID, std::vector<Product*> productList){
+    Order* new_order = new Order(orderList.size(), customerID, waiterID, productList);
+    orderList.push_back(new_order);
 
-        return new_order.getID();
-    };
+    return new_order->getID();
+};
 
-    void Pizzeria::decreaseOrdersTime(){
-        print("****************************************************************************************");
-        for(auto order : ordersList){
-            if (order->isReady() && !order->isDelivered()){
-                Task* new_task = Task(order->getCustomerID(), TaskTypes.DO, order->getID());
-                getWaiterByID(findMinTaskWaiter()).addTask(new_task);
-                getOrderByID(order -> getID()) -> setIsDelivered(true);
-            }
-            else if (!order->isReady()) {
-                order->decreaseWaitTime();
-            }
-            
+void Pizzeria::decreaseOrdersTime(){
+    std::cout << "****************************************************************************************";
 
-            print("ORDER ID:", order->getID(), "CUS ID:", order->getCustomerID(), "WAITTIME:", order->getWaitTime(), "IS READY:", order->isReady(), "IS DELIVERED:", order->isDelivered());
+    
+
+    for(auto order : orderList){
+        if (order->getIsReady() && !order->getIsDelivered()){
+            TaskPayload *payload = new TaskPayload();
+            payload -> setOrderID(order->getID());
+
+            Task* new_task = new Task(order->getCustomerID(), TaskTypes::DO, payload);
+            getWaiterByID(findMinTaskWaiter())->addTask(new_task);
+            getOrderByID(order -> getID()) -> setIsDelivered(true);
         }
-        print("****************************************************************************************");
-
-    };
-
-    int Pizzeria::findMinTaskWaiter(){
-        int min_tasks = waitersList[0].getNumberOfTasks();
-        int waiterID = waitersList[0].getID();
-
-        for(auto waiter : waitersList){
-            if (waiter->getNumberOfTasks() < min_tasks){
-                min_tasks = waiter->getNumberOfTasks();
-                waiterID = waiter->getID();
-            }
+        else if (!order->getIsReady()) {
+            order->decreaseWaitTime();
         }
-        return waiterID;
         
-    };
 
+        std::cout << "ORDER ID:" << order->getID() << "CUS ID:" << order->getCustomerID() << 
+        "WAITTIME:"<< order->getWaitTime() << "IS READY:" << order->getIsReady() << 
+        "IS DELIVERED:" << order->getIsDelivered();
+    }
+    std::cout << "****************************************************************************************";
+
+};
+
+int Pizzeria::findMinTaskWaiter(){
+    int min_tasks = waiterList[0]->getNumberOfTasks();
+    int waiterID = waiterList[0]->getID();
+
+    for(auto waiter : waiterList){
+        if (waiter->getNumberOfTasks() < min_tasks){
+            min_tasks = waiter->getNumberOfTasks();
+            waiterID = waiter->getID();
+        }
+    }
+    return waiterID;
 };

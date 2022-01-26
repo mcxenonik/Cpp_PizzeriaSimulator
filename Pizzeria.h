@@ -3,17 +3,18 @@
 #include "Table.h"
 #include "Order.h"
 #include "Menu.h"
+#include <vector>
 class Pizzeria
 {
     private:
-        std::vector<Waiter*> waitersList;
-        std::vector<Customer*> customersList;
-        std::vector<Table*> tablesList;
-        std::vector<Order*> ordersList;
+        std::vector<Waiter*> waiterList;
+        std::vector<Customer*> customerList;
+        std::vector<Table*> tableList;
+        std::vector<Order*> orderList;
         Menu* menu;
 
     public:
-        creatPizzeria(numOfTables, numOfWaiters, numOfCustomers);
+        Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers);
 
         std::vector<Waiter*> getWaitersList();
         std::vector<Customer*> getCustomerList();
@@ -21,16 +22,16 @@ class Pizzeria
         std::vector<Order*> getOrdersList();
         Menu* getMenu();
 
-        Waiter* getWaiterByID(waiterID);
-        Customer* getCustomerByID(customerID);
-        Table* getTableByID(TableID);
-        Order* getOrderByID(OrderID);
-        Product* getProductByID(ProductID);
+        Waiter* getWaiterByID(int waiterID);
+        Customer* getCustomerByID(int customerID);
+        Table* getTableByID(int tableID);
+        Order* getOrderByID(int orderID);
+        Product* getProductByID(int productID);
         
         void addWaiter();
         void addCustomer();
         void addTable();
-        int addOrder(customerID, waiterID, productList);
+        int addOrder(int customerID, int waiterID, std::vector<Product*> productList);
         void decreaseOrdersTime();
         int findMinTaskWaiter();
 
