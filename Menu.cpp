@@ -9,8 +9,10 @@
 #include <list>
 #include <string>
 
-
-
+Menu::Menu()
+{
+    createMenu();
+}
 
 void Menu::createMenu()
 {
@@ -33,6 +35,16 @@ void Menu::createMenu()
         
         productList.push_back(newProduct);
     }
+}
+
+std::vector<Product*> Menu::getProductList()
+{
+    return productList;
+}
+
+Product* Menu::getProductByID(int productID)
+{
+    return productList[productID];
 }
 
 Menu::~Menu()

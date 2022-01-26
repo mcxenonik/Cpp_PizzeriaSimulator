@@ -10,15 +10,15 @@ class Task
         int ID;
         int customerID;
         TaskTypes taskType;
-        TaskPayload taskPayload;
+        TaskPayload *taskPayload;
         
     public:
-        Task(int new_customerID, TaskTypes new_taskType, TaskPayload new_taskPayload);
+        Task(int new_customerID, TaskTypes new_taskType, TaskPayload *new_taskPayload);
 
         int getID();
         int getCustomerID();
         TaskTypes getTaskType();
-        TaskPayload getTaskPayload();
+        TaskPayload* getTaskPayload();
 
         ~Task();
 };

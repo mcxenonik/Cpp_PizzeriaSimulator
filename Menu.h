@@ -3,14 +3,20 @@
 
 #include "Menu.h"
 #include "Product.h"
-#include <list>
+#include <vector>
 
 class Menu
 {
     private: 
-        std::list<Product*> productList;
+        std::vector<Product*> productList;
         void createMenu();
+
     public:
+        Menu();
+
+        std::vector<Product*> getProductList();
+        Product* getProductByID(int productID);
+
         ~Menu();
 };
     

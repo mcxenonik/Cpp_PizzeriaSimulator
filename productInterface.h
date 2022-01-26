@@ -10,6 +10,7 @@ class ProductInterface
         virtual std::string getName() = 0;
         virtual int getPrice() = 0;
         virtual int getPrepareTime() = 0;
+        virtual int getEatingTime() = 0;
 };
 
 #endif
