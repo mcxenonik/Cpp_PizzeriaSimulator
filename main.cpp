@@ -24,12 +24,12 @@ int main()
 
     while(run_sim)
     {
-        if (end_list.size() == sim_pizzeria -> getCustomerList().size())
+        if (end_list.size() == sim_pizzeria -> getCustomerList() -> size())
         {
             run_sim = false;
         }
 
-        for (auto customer_ptr : sim_pizzeria -> getCustomerList())
+        for (auto customer_ptr : *(sim_pizzeria -> getCustomerList()))
         {
             customer_ptr -> doAction(sim_pizzeria);
 
@@ -41,9 +41,9 @@ int main()
 
         std::cout << "----------------------------------------------------------------------------------------" << std::endl;
 
-        for (auto waiter_ptr : sim_pizzeria -> getWaiterList())
+        for (auto waiter_ptr : *(sim_pizzeria -> getWaiterList()))
         {
-            waiter_ptr -> doTask(sim_pizzeria);
+            waiter_ptr -> doTask(sim_pizzeria -> getCustomerList(), sim_pizzeria -> getOrdersList());
         }
 
         sim_pizzeria -> decreaseOrdersTime();

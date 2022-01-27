@@ -25,7 +25,7 @@ class Waiter : public Person
 
         int getNumberOfTasks();
         void addTask(Task *new_task);
-        void doTask(Pizzeria *simulated_pizzeria);
+        void doTask(std::vector<Customer*>* customerList_ptr, std::vector<Order*>* orderList_ptr);
         void printLog(TaskTypes taskType, int customerID, int orderID);
 
         ~Waiter();

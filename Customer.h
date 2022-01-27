@@ -26,20 +26,22 @@ class Customer : public Person
         int eatTime;
         int waitingTimeStat;
 
-        bool takeTable(Pizzeria *simulated_pizzeria);
+        bool takeTable(std::vector<Table*>* tableList_ptr);
         void waitForFreeTable();
-        void orderMenu(Pizzeria *simulated_pizzeria);
+        void orderMenu(std::vector<Waiter*>* waiterList_ptr);
         void waitForMenu();
-        void submitOrder(Pizzeria *simulated_pizzeria);
+        void submitOrder(std::vector<Waiter*>* waiterList_ptr);
         void waitForAcceptOrder();
         void waitForPrepareOrder();
         void eat();
-        void askForBill(Pizzeria *simulated_pizzeria);
+        void askForBill(std::vector<Waiter*>* waiterList_ptr);
         void waitForBill();
-        void takeBill(Pizzeria *simulated_pizzeria);
+        void takeBill(std::vector<Waiter*>* waiterList_ptr);
         void waitForPayBill();
-        void payBill(Pizzeria *simulated_pizzeria);
-        void out(Pizzeria *simulated_pizzeria);
+        void payBill(std::vector<Order*>* orderList_ptr);
+        void out(std::vector<Table*>* tableList_ptr);
+
+        Waiter* findMinTaskWaiter(std::vector<Waiter*>* waiterList_ptr);
         
         
     public:
@@ -57,7 +59,7 @@ class Customer : public Person
         void setEatTime(int new_eatTime);
         void setState(CustomerStates new_state);
 
-        void doAction(Pizzeria *simulated_pizzeria);
+        void doAction(std::vector<Waiter*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr);
 
         void printLog(bool result, int totalPrice);
 

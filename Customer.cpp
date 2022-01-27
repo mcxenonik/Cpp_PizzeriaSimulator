@@ -59,9 +59,9 @@ void Customer::setState(CustomerStates new_state)
     state = new_state;
 }
 
-bool Customer::takeTable(Pizzeria *simulated_pizzeria)
+bool Customer::takeTable(std::vector<Table*>* tableList_ptr)
 {
-    for(auto table_ptr : simulated_pizzeria -> getTableList())
+    for(auto table_ptr : *tableList_ptr)
     {
         if (table_ptr -> getGroupID() == groupID && !table_ptr -> getIsFull())
         {
@@ -71,7 +71,7 @@ bool Customer::takeTable(Pizzeria *simulated_pizzeria)
         }
     }
 
-    for(auto table_ptr : simulated_pizzeria -> getTableList())
+    for(auto table_ptr : *tableList_ptr)
     {
         if (table_ptr -> getGroupID() == 0)
         {
@@ -90,13 +90,15 @@ void Customer::waitForFreeTable()
     waitingTimeStat++;
 }
 
-void Customer::orderMenu(Pizzeria *simulated_pizzeria)
+void Customer::orderMenu(std::vector<Waiter*>* waiterList_ptr)
 {
-    int waiterID = simulated_pizzeria -> findMinTaskWaiter();
+    // int waiterID = findMinTaskWaiter(waiterList_ptr);
     TaskPayload *payload = new TaskPayload();
 
     Task *new_task = new Task(ID, TaskTypes::GM, payload);
-    simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
+
+    findMinTaskWaiter(waiterList_ptr) -> addTask(new_task);
+    // simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
 
 }
 
@@ -105,9 +107,9 @@ void Customer::waitForMenu()
     waitingTimeStat++;
 }
 
-void Customer::submitOrder(Pizzeria *simulated_pizzeria)
+void Customer::submitOrder(std::vector<Waiter*>* waiterList_ptr)
 {
-    int waiterID = simulated_pizzeria -> findMinTaskWaiter();
+    // int waiterID = findMinTaskWaiter();
 
     std::vector<Product*> productList = simulated_pizzeria -> getMenu() -> getProductList();
 
@@ -122,7 +124,9 @@ void Customer::submitOrder(Pizzeria *simulated_pizzeria)
     payload -> setOrderedProductsList(orderedProductsList);
 
     Task *new_task = new Task(ID, TaskTypes::CO, payload);
-    simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
+
+    findMinTaskWaiter(waiterList_ptr) -> addTask(new_task);
+    // simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
 
 }
 
@@ -141,15 +145,17 @@ void Customer::eat()
     eatTime--;
 }
 
-void Customer::askForBill(Pizzeria *simulated_pizzeria)
+void Customer::askForBill(std::vector<Waiter*>* waiterList_ptr)
 {
-    int waiterID = simulated_pizzeria -> findMinTaskWaiter();
+    // int waiterID = findMinTaskWaiter();
 
     TaskPayload *payload = new TaskPayload();
     payload -> setOrderID(orderID);
 
     Task *new_task = new Task(ID, TaskTypes::GR, payload);
-    simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
+
+    findMinTaskWaiter(waiterList_ptr) -> addTask(new_task);
+    // simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
 
 }
 
@@ -158,15 +164,17 @@ void Customer::waitForBill()
     waitingTimeStat++;
 }
 
-void Customer::takeBill(Pizzeria *simulated_pizzeria)
+void Customer::takeBill(std::vector<Waiter*>* waiterList_ptr)
 {
-    int waiterID = simulated_pizzeria -> findMinTaskWaiter();
+    // int waiterID = findMinTaskWaiter();
 
     TaskPayload *payload = new TaskPayload();
     payload -> setOrderID(orderID);
 
     Task *new_task = new Task(ID, TaskTypes::TR, payload);
-    simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
+
+    findMinTaskWaiter(waiterList_ptr) -> addTask(new_task);
+    // simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
 }
 
 void Customer::waitForPayBill()
@@ -174,25 +182,28 @@ void Customer::waitForPayBill()
     waitingTimeStat++;
 }
 
-void Customer::payBill(Pizzeria *simulated_pizzeria)
+void Customer::payBill(std::vector<Order*>* orderList_ptr)
 {
-    simulated_pizzeria -> getOrderByID(orderID) -> getReceipt() -> paidReceipt();
-    simulated_pizzeria -> getOrderByID(orderID) -> setPaid();
+    (*orderList_ptr)[orderID] -> getReceipt() -> paidReceipt();
+    (*orderList_ptr)[orderID] -> setPaid();
+    // simulated_pizzeria -> getOrderByID(orderID) -> getReceipt() -> paidReceipt();
+    // simulated_pizzeria -> getOrderByID(orderID) -> setPaid();
 }
 
-void Customer::out(Pizzeria *simulated_pizzeria)
+void Customer::out(std::vector<Table*>* tableList_ptr)
 {
-    simulated_pizzeria -> getTableByID(tableID) -> deleteCustomerFromTable(ID);
+    (*tableList_ptr)[tableID] -> deleteCustomerFromTable(ID);
+    // simulated_pizzeria -> getTableByID(tableID) -> deleteCustomerFromTable(ID);
     tableID = 0;
 }
 
-void Customer::doAction(Pizzeria *simulated_pizzeria)
+void Customer::doAction(std::vector<Waiter*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr)
 {
     switch(state)
     {
         case CustomerStates::NEW:
         {
-            bool result = takeTable(simulated_pizzeria);
+            bool result = takeTable(tableList_ptr);
 
             if (result)
             {
@@ -211,7 +222,7 @@ void Customer::doAction(Pizzeria *simulated_pizzeria)
         }
         case CustomerStates::OM:
         {
-            orderMenu(simulated_pizzeria);
+            orderMenu(waiterList_ptr);
 
             printLog(true, 0);
             state = CustomerStates::WFM;
@@ -229,7 +240,7 @@ void Customer::doAction(Pizzeria *simulated_pizzeria)
         }
         case CustomerStates::SO:
         {
-            submitOrder(simulated_pizzeria);
+            submitOrder(waiterList_ptr);
 
             printLog(true, 0);
             state = CustomerStates::WFAO;
@@ -273,7 +284,7 @@ void Customer::doAction(Pizzeria *simulated_pizzeria)
         }
         case CustomerStates::AFB:
         {
-            askForBill(simulated_pizzeria);
+            askForBill(waiterList_ptr);
 
             printLog(true, 0);
             state = CustomerStates::WFB;
@@ -291,9 +302,9 @@ void Customer::doAction(Pizzeria *simulated_pizzeria)
         }
         case CustomerStates::TB:
         {
-            takeBill(simulated_pizzeria);
+            takeBill(waiterList_ptr);
 
-            printLog(true, simulated_pizzeria -> getOrderByID(orderID) -> getReceipt() -> getTotalPrice());
+            printLog(true, (*orderList_ptr)[orderID] -> getReceipt() -> getTotalPrice());
             state = CustomerStates::WFPB;
 
             break;
@@ -309,16 +320,16 @@ void Customer::doAction(Pizzeria *simulated_pizzeria)
         }
         case CustomerStates::PB:
         {
-            payBill(simulated_pizzeria);
+            payBill(orderList_ptr);
 
-            printLog(true, simulated_pizzeria -> getOrderByID(orderID) -> getReceipt() -> getTotalPrice());
+            printLog(true, (*orderList_ptr)[orderID] -> getReceipt() -> getTotalPrice());
             state = CustomerStates::OUT;
 
             break;
         }
         case CustomerStates::OUT:
         {
-            out(simulated_pizzeria);
+            out(tableList_ptr);
 
             printLog(true, 0);
             state = CustomerStates::OUT;
@@ -430,4 +441,17 @@ void Customer::printLog(bool result, int totalPrice)
 
 Customer::~Customer() 
 {
+}
+
+Waiter* Customer::findMinTaskWaiter(std::vector<Waiter*>* waiterList_ptr){
+    int min_tasks = (*waiterList_ptr)[0] -> getNumberOfTasks();
+    int waiterID = (*waiterList_ptr)[0] -> getID();
+
+    for(auto waiter : (*waiterList_ptr)){
+        if (waiter -> getNumberOfTasks() < min_tasks){
+            min_tasks = waiter -> getNumberOfTasks();
+            waiterID = waiter -> getID();
+        }
+    }
+    return (*waiterList_ptr)[waiterID];
 }

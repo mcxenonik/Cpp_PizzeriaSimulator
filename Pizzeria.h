@@ -21,10 +21,10 @@ class Pizzeria
     public:
         Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers);
 
-        std::vector<Waiter*> getWaiterList();
-        std::vector<Customer*> getCustomerList();
-        std::vector<Table*> getTableList();
-        std::vector<Order*> getOrdersList();
+        std::vector<Waiter*>* getWaiterList();
+        std::vector<Customer*>* getCustomerList();
+        std::vector<Table*>* getTableList();
+        std::vector<Order*>* getOrdersList();
         Menu* getMenu();
 
         Waiter* getWaiterByID(int waiterID);

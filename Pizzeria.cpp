@@ -14,20 +14,20 @@ Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers)
         addCustomer();
 }
 
-std::vector<Waiter*> Pizzeria::getWaiterList(){
-    return waiterList;
+std::vector<Waiter*>* Pizzeria::getWaiterList(){
+    return &waiterList;
 }
 
-std::vector<Customer*> Pizzeria::getCustomerList(){
-    return customerList;
+std::vector<Customer*>* Pizzeria::getCustomerList(){
+    return &customerList;
 }
 
-std::vector<Table*> Pizzeria::getTableList(){
-    return tableList;
+std::vector<Table*>* Pizzeria::getTableList(){
+    return &tableList;
 }
 
-std::vector<Order*> Pizzeria::getOrdersList(){
-    return orderList;
+std::vector<Order*>* Pizzeria::getOrdersList(){
+    return &orderList;
 }
 
 Menu* Pizzeria::getMenu(){
