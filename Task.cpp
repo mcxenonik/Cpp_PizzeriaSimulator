@@ -29,3 +29,8 @@ TaskPayload* Task::getTaskPayload()
 {
     return taskPayload;
 }
+
+Task::~Task()
+{
+    delete taskPayload;
+}

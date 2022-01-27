@@ -73,7 +73,7 @@ bool Customer::takeTable(Pizzeria *simulated_pizzeria)
 
     for(auto table_ptr : simulated_pizzeria -> getTableList())
     {
-        if (table_ptr -> getGroupID() == NULL)
+        if (table_ptr -> getGroupID() == 0)
         {
             table_ptr -> addCustomerToTable(ID, groupID);
             tableID = table_ptr -> getID();
@@ -183,7 +183,7 @@ void Customer::payBill(Pizzeria *simulated_pizzeria)
 void Customer::out(Pizzeria *simulated_pizzeria)
 {
     simulated_pizzeria -> getTableByID(tableID) -> deleteCustomerFromTable(ID);
-    tableID = NULL;
+    tableID = 0;
 }
 
 void Customer::doAction(Pizzeria *simulated_pizzeria)

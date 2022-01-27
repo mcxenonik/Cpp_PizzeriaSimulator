@@ -33,7 +33,7 @@ void Waiter::doTask(Pizzeria *sim_pizzeria)
 {
     if(taskQueue.size() == 0)
     {
-        //printLog();
+        printLog(TaskTypes::FR, 0, 0);
         return;
     }
 
@@ -95,7 +95,7 @@ void Waiter::doTask(Pizzeria *sim_pizzeria)
             printLog(taskType, customerId, orderID);
             break;
         }
-        default:
+        case TaskTypes::FR:
         {
             break;
         }
@@ -128,7 +128,7 @@ void Waiter::printLog(TaskTypes taskType, int customerId, int orderID)
             std::cout << "KELNER:" << ID << "POBIERA OPLATE DO ZAMOWIENIA:" << orderID << "OD KLIENTA:" << customerId;
             break;
 
-        default:
+        case TaskTypes::FR:
             std::cout << "KELNER:" << ID << "OCZEKUJE NA ZADANIE";
             break;
     }

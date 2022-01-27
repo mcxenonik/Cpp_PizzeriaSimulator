@@ -19,6 +19,7 @@ class Order
         std::vector<Product*> productList;
         Receipt *receipt;
         void setWaitTime();
+        
     public:
         Order(int new_id, int new_customerID, int new_waiterID, std::vector<Product*> new_productList);
         int  getID();

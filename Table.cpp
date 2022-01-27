@@ -5,17 +5,12 @@ Table::Table(int new_id, unsigned int new_size)
     ID = new_id;
     size = new_size;
     isFull = false;
-    groupID = NULL;
+    groupID = 0;
 }
 
 int Table::getID()
 {
     return ID;
-}
-
-unsigned int Table::getSize()
-{
-    return size;
 }
 
 bool Table::getIsFull()
@@ -25,7 +20,7 @@ bool Table::getIsFull()
 
 int Table::getGroupID()
 {
-    return *groupID;
+    return groupID;
 }
 
 std::list<int> Table::getCustomersIDList()
@@ -37,10 +32,9 @@ void Table::addCustomerToTable(int customerID, int customerGroupID)
 {
     customersIDList.push_back(customerID);
 
-    if (groupID == NULL)
+    if (groupID == 0)
     {
-        groupID = new int;
-        *groupID = customerGroupID;
+        groupID = customerGroupID;
     }
 
     if (customersIDList.size() == size)
@@ -56,11 +50,11 @@ void Table::deleteCustomerFromTable(int customerID)
 
     if (customersIDList.size() == 0)
     {
-        groupID = NULL;
+        groupID = 0;
     }
 }
 
 Table::~Table()
 {
-    delete groupID;
+
 }
