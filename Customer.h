@@ -25,6 +25,21 @@ class Customer : public Person
         int orderID;
         int eatTime;
         int waitingTimeStat;
+
+        bool takeTable(Pizzeria *simulated_pizzeria);
+        void waitForFreeTable();
+        void orderMenu(Pizzeria *simulated_pizzeria);
+        void waitForMenu();
+        void submitOrder(Pizzeria *simulated_pizzeria);
+        void waitForAcceptOrder();
+        void waitForPrepareOrder();
+        void eat();
+        void askForBill(Pizzeria *simulated_pizzeria);
+        void waitForBill();
+        void takeBill(Pizzeria *simulated_pizzeria);
+        void waitForPayBill();
+        void payBill(Pizzeria *simulated_pizzeria);
+        void out(Pizzeria *simulated_pizzeria);
         
         
     public:
@@ -42,21 +57,6 @@ class Customer : public Person
         void setEatTime(int new_eatTime);
         void setState(CustomerStates new_state);
 
-        bool takeTable(Pizzeria *simulated_pizzeria);
-        void waitForFreeTable();
-        void orderMenu(Pizzeria *simulated_pizzeria);
-        void waitForMenu();
-        void submitOrder(Pizzeria *simulated_pizzeria);
-        void waitForAcceptOrder();
-        void waitForPrepareOrder();
-        void eat();
-        void askForBill(Pizzeria *simulated_pizzeria);
-        void waitForBill();
-        void takeBill(Pizzeria *simulated_pizzeria);
-        void waitForPayBill();
-        void payBill(Pizzeria *simulated_pizzeria);
-        void out(Pizzeria *simulated_pizzeria);
-        
         void doAction(Pizzeria *simulated_pizzeria);
 
         void printLog(bool result, int totalPrice);

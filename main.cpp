@@ -5,27 +5,11 @@
 #include <algorithm>
 #include <unistd.h>
 
-// def formatTime(startTime, minutes):
-//     if (minutes >= 60):
-//         minutes -= 60
-//         startTime += 1
-
-//     if (len(str(minutes)) == 1):
-//         min = "0" + str(minutes)
-//         hour = str(startTime)
-//     else:
-//         min = str(minutes)
-//         hour = str(startTime)
-
-//     return hour, min, startTime, minutes
-
 int main()
 {
     int numOfTables = 5;
     int numOfWaiters = 4;
     int numOfCustomers = 30;
-
-    // come_times = [(8, 4), (8, 8), (8, 12), (8, 18), (8, 30), (8, 32), (8, 34), (8, 40), (8, 46), (8, 50)];
 
     int startTime = 8;
     int minutes = 0;
@@ -44,12 +28,6 @@ int main()
         {
             run_sim = false;
         }
-
-        // if ((startTime, minutes) in come_times)
-        // {
-        //     sim_pizzeria.addCustomer()
-        //     print("PRZYCHODZI NOWY KLIENT:", sim_pizzeria.getCustomersList()[-1].getID(), "Z GRUPY:", sim_pizzeria.getCustomersList()[-1].getGroupID())
-        // }
 
         for (auto customer_ptr : sim_pizzeria -> getCustomerList())
         {
@@ -70,12 +48,20 @@ int main()
 
         sim_pizzeria -> decreaseOrdersTime();
 
+
         minutes += step;
-        // hour, min, startTime, minutes = formatTime(startTime, minutes)
+
+        if (minutes >= 60)
+        {
+            minutes -= 60;
+            startTime += 1;
+        }
+
         std::cout << "========================================================================================" << std::endl;
-        // std::cout << "CZAS:" << hour << ":" << min << std::endl;
+        std::cout << "CZAS:" << startTime << ":" << minutes << std::endl;
         std::cout << "WYSZLO KLIENTOW:" << end_list.size() << std::endl;
         std::cout << "========================================================================================" << std::endl;
+        
         if (!run_sim)
         {
             std::cout << "END SIMULATION" << std::endl;
@@ -86,6 +72,7 @@ int main()
             // sim_pizzeria -> countMinMaxWaiterTasksDone();
             // sim_pizzeria -> countMinMaxWaiterValueOfCollectedOrdersStat();
         }
+
         sleep(step);
     };
 }
