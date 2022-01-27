@@ -1,14 +1,48 @@
+import argparse
 from CustomerStates import CustomerStates
 from Pizzeria import Pizzeria
 from time import ctime, sleep
 
 
-def setSimulationParameters():
-    numOfTables = 5
-    numOfWaiters = 4
-    numOfCustomers = 30
+def read_from_file(filename):
+    with open(filename, "r") as file:
+        parameters = []
+        counter = 0
 
-    come_times = [(8, 4), (8, 8), (8, 12), (8, 18), (8, 30), (8, 32), (8, 34), (8, 40), (8, 46), (8, 50)]
+        for line in file:
+            if (counter != 3):
+                parameters.append(int(line.split("=")[1].replace("\n", "")))
+            else:
+                parameters.append(line.split("=")[1].replace("\n", ""))
+
+            counter += 1
+
+        p = parameters[3].split(";")
+
+        par = []
+
+        for ch in p:
+            par.append(ch.split(","))
+
+        come_times = []
+
+        for z in par:
+            come_times.append((int(z[0]), int(z[1])))
+
+    parameters[3] = come_times
+
+    return parameters
+
+
+def setSimulationParameters(filename):
+    parameters = read_from_file(filename)
+
+    numOfTables = parameters[0]
+    numOfWaiters = parameters[1]
+    numOfCustomers = parameters[2]
+
+    come_times = parameters[3]
+    print(come_times)
 
     startTime = 8
     minutes = 0
@@ -41,7 +75,11 @@ def formatTime(startTime, minutes):
 
 
 if __name__ == "__main__":
-    numOfTables, numOfWaiters, numOfCustomers, come_times, startTime, minutes, step, run_sim, end_list = setSimulationParameters()
+    parser = argparse.ArgumentParser(description="Pizzeria Simulation")
+    parser.add_argument("filename", help="Name of file to load")
+    args = parser.parse_args()
+
+    numOfTables, numOfWaiters, numOfCustomers, come_times, startTime, minutes, step, run_sim, end_list = setSimulationParameters(args.filename)
 
     sim_pizzeria = Pizzeria(numOfTables, numOfWaiters, numOfCustomers)
 
