@@ -17,7 +17,10 @@ int TaskPayload::getOrderID()
 
 void TaskPayload::setOrderedProductsList(std::vector<Product*> new_orderedProductsList)
 {
-    orderedProductsList = new_orderedProductsList;
+    for (auto product_ptr : new_orderedProductsList)
+    {
+        orderedProductsList.push_back(product_ptr);
+    }
 }
 
 void TaskPayload::setOrderID(int new_orderID)

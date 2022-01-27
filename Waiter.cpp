@@ -42,34 +42,34 @@ void Waiter::doTask(Pizzeria *sim_pizzeria)
     Task* task = taskQueue.front();
     taskQueue.erase(taskQueue.begin());
 
-    TaskTypes taskType = task->getTaskType();
-    int customerId = task->getCustomerID();
+    TaskTypes taskType = task -> getTaskType();
+    int customerId = task -> getCustomerID();
 
     switch(taskType)
     {
         case TaskTypes::GM:
         {
-            sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::SO);
+            sim_pizzeria -> getCustomerByID(customerId)->setState(CustomerStates::SO);
 
             printLog(taskType, customerId, 0);
             break;
         }
         case TaskTypes::CO:
         {
-            std::vector<Product*> orderedProductsList = task->getTaskPayload()->getOrderedProductsList();
+            std::vector<Product*> orderedProductsList = task -> getTaskPayload() -> getOrderedProductsList();
 
-            sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::WFPO);
-            int orderID = sim_pizzeria->addOrder(customerId, ID, orderedProductsList);
-            sim_pizzeria->getCustomerByID(customerId)->setOrderID(orderID);
+            sim_pizzeria -> getCustomerByID(customerId) -> setState(CustomerStates::WFPO);
+            int orderID = sim_pizzeria -> addOrder(customerId, ID, orderedProductsList);
+            sim_pizzeria -> getCustomerByID(customerId) -> setOrderID(orderID);
 
-            valueOfCollectedOrdersStat += orderedProductsList[0]->getPrice() + orderedProductsList[1]->getPrice();
+            valueOfCollectedOrdersStat += orderedProductsList[0] -> getPrice() + orderedProductsList[1] -> getPrice();
 
             printLog(taskType, customerId, orderID);
             break;
         }
         case TaskTypes::DO:
         {
-            int orderID = task->getTaskPayload()->getOrderID();
+            int orderID = task -> getTaskPayload() -> getOrderID();
             
             sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::E);
 
@@ -78,19 +78,19 @@ void Waiter::doTask(Pizzeria *sim_pizzeria)
         }
         case TaskTypes::GR:
         {
-            int orderID = task->getTaskPayload()->getOrderID();
+            int orderID = task -> getTaskPayload() -> getOrderID();
 
-            sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::TB);
-            sim_pizzeria->getOrderByID(orderID)->createReceipt();
+            sim_pizzeria -> getCustomerByID(customerId) -> setState(CustomerStates::TB);
+            sim_pizzeria -> getOrderByID(orderID) -> createReceipt();
 
             printLog(taskType, customerId, orderID);
             break;
         }
         case TaskTypes::TR:
         {
-            int orderID = task->getTaskPayload()->getOrderID();
+            int orderID = task -> getTaskPayload() -> getOrderID();
 
-            sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::PB);
+            sim_pizzeria -> getCustomerByID(customerId) -> setState(CustomerStates::PB);
 
             printLog(taskType, customerId, orderID);
             break;

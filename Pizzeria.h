@@ -40,6 +40,8 @@ class Pizzeria
         void decreaseOrdersTime();
         int findMinTaskWaiter();
 
+        ~Pizzeria();
+
 };
 
 #endif
