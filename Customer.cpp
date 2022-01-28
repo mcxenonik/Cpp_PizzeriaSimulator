@@ -361,42 +361,42 @@ void Customer::printLog(bool result, int totalPrice)
         {
             if (result)
             {
-                std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "ZAJMUJE STOLIK:" << tableID << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " ZAJMUJE STOLIK: " << tableID << std::endl;
             }
             else
             {
-                std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "OCZEKUJE NA WOLNY STOLIK" << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " OCZEKUJE NA WOLNY STOLIK" << std::endl;
             }
 
             break;
         }
         case CustomerStates::OM:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "ZAMOWIL KARTE DAN" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " ZAMOWIL KARTE DAN" << std::endl;
 
             break;
         }
         case CustomerStates::WFM:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "OCZEKUJE NA KARTE DAN" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA KARTE DAN" << std::endl;
 
             break;
         }
         case CustomerStates::SO:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << ID << "SKŁADA ZAMOWIENIE" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << ID << " SKŁADA ZAMOWIENIE" << std::endl;
 
             break;
         }
         case CustomerStates::WFAO:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "OCZEKUJE NA PRZYJECIE ZAMOWIENIA" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA PRZYJECIE ZAMOWIENIA" << std::endl;
 
             break;
         }
         case CustomerStates::WFPO:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "OCZEKUJE NA PRZYGOTOWANIE ZAMOWIENIA" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA PRZYGOTOWANIE ZAMOWIENIA" << std::endl;
 
             break;
         }
@@ -404,48 +404,48 @@ void Customer::printLog(bool result, int totalPrice)
         {
             if (eatTime != 0)
             {
-                std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "SPOZYWA ZAMOWIENIE. POZOSTALO:" << eatTime << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " SPOZYWA ZAMOWIENIE. POZOSTALO: " << eatTime << std::endl;
             }
             else
             {
-                std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "SKONCZYL SPOZYWANIE ZAMOWIENIA" << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " SKONCZYL SPOZYWANIE ZAMOWIENIA" << std::endl;
             }
 
             break;
         }
         case CustomerStates::AFB:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << ID << "SIEDZACY PRZY STOLIKU:" << tableID << "POPROSIL O RACHUNEK" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << ID << " SIEDZACY PRZY STOLIKU: " << tableID << " POPROSIL O RACHUNEK" << std::endl;
 
             break;
         }
         case CustomerStates::WFB:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "OCZEKUJE NA RACHUNEK" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY:" << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA RACHUNEK" << std::endl;
 
             break;
         }
         case CustomerStates::TB:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "BIERZE RACHUNEK O WARTOSCI:" << totalPrice << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " BIERZE RACHUNEK O WARTOSCI: " << totalPrice << std::endl;
 
             break;
         }
         case CustomerStates::WFPB:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "OCZEKUJE NA POBRANIE OPLATY" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA POBRANIE OPLATY" << std::endl;
 
             break;
         }
         case CustomerStates::PB:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "PLACI RACHUNEK O WARTOSCI:" << totalPrice << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " PLACI RACHUNEK O WARTOSCI: " << totalPrice << std::endl;
 
             break;
         }
         case CustomerStates::OUT:
         {
-            std::cout << "KLIENT:" << ID << "Z GRUPY:" << groupID << "SIEDZACY PRZY STOLIKU:" << tableID << "ODCHODZI" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " ODCHODZI" << std::endl;
 
             break;
         }

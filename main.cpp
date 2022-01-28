@@ -7,9 +7,9 @@
 
 int main()
 {
-    int numOfTables = 5;
-    int numOfWaiters = 4;
-    int numOfCustomers = 30;
+    int numOfTables = 2;
+    int numOfWaiters = 2;
+    int numOfCustomers = 4;
 
     int startTime = 8;
     int minutes = 0;
@@ -58,8 +58,8 @@ int main()
         }
 
         std::cout << "========================================================================================" << std::endl;
-        std::cout << "CZAS:" << startTime << ":" << minutes << std::endl;
-        std::cout << "WYSZLO KLIENTOW:" << end_list.size() << std::endl;
+        std::cout << "CZAS: " << startTime << ":" << minutes << std::endl;
+        std::cout << "WYSZLO KLIENTOW: " << end_list.size() << std::endl;
         std::cout << "========================================================================================" << std::endl;
         
         if (!run_sim)

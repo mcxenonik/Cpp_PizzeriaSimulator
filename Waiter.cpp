@@ -122,27 +122,27 @@ void Waiter::printLog(TaskTypes taskType, int customerId, int orderID)
     switch(taskType)
     {
         case TaskTypes::GM:
-            std::cout << "KELNER:" << ID << "PODAJE KARTE DAN KLIENTOWI:" << customerId << std::endl;
+            std::cout << "KELNER: " << ID << " PODAJE KARTE DAN KLIENTOWI: " << customerId << std::endl;
             break;
 
         case TaskTypes::CO:
-            std::cout << "KELNER:" << ID << "ODBIERA ZAMOWIENIE:" << orderID << "OD KLIENTA:" << customerId << std::endl;
+            std::cout << "KELNER: " << ID << " ODBIERA ZAMOWIENIE: " << orderID << " OD KLIENTA: " << customerId << std::endl;
             break;
 
         case TaskTypes::DO:
-            std::cout << "KELNER:" << ID << "DOSTARCZA ZAMOWIENIE:" << orderID << "DO KLIENTA:" << customerId << std::endl;
+            std::cout << "KELNER: " << ID << " DOSTARCZA ZAMOWIENIE: " << orderID << " DO KLIENTA: " << customerId << std::endl;
             break;
 
         case TaskTypes::GR:
-            std::cout << "KELNER:" << ID << "PODAJE RACHUNEK DO ZAMOWIENIA:" << orderID << "KLIENTOWI:" << customerId << std::endl;
+            std::cout << "KELNER: " << ID << " PODAJE RACHUNEK DO ZAMOWIENIA: " << orderID << " KLIENTOWI: " << customerId << std::endl;
             break;
 
         case TaskTypes::TR:
-            std::cout << "KELNER:" << ID << "POBIERA OPLATE DO ZAMOWIENIA:" << orderID << "OD KLIENTA:" << customerId << std::endl;
+            std::cout << "KELNER: " << ID << " POBIERA OPLATE DO ZAMOWIENIA: " << orderID << " OD KLIENTA: " << customerId << std::endl;
             break;
 
         case TaskTypes::FR:
-            std::cout << "KELNER:" << ID << "OCZEKUJE NA ZADANIE" << std::endl;
+            std::cout << "KELNER: " << ID << " OCZEKUJE NA ZADANIE " << std::endl;
             break;
     }
 }
