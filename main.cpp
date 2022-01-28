@@ -20,7 +20,7 @@ int main()
 
     Pizzeria *sim_pizzeria = new Pizzeria(numOfTables, numOfWaiters, numOfCustomers);
 
-    std::cout << "START:" << startTime << ":" << minutes << std::endl;
+    std::cout << "START: " << startTime << ":" << minutes << std::endl;
 
     while(run_sim)
     {

@@ -12,6 +12,10 @@ class Drink : public Product
         Drink(int new_id, std::string new_name, double new_price, int new_drinkingTime);
         int getEatingTime();
 
+        friend std::ostream& operator<<(std::ostream& os, const Drink& drink);
+
 };
+
+std::ostream& operator<<(std::ostream& os, const Drink& drink);
 
 #endif

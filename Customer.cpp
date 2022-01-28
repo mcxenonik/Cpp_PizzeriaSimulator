@@ -10,6 +10,7 @@ Person(new_id, new_name)
     state = CustomerStates::NEW;
     eatTime = 0;
     waitingTimeStat = 0;
+    menu = nullptr;
 }
 
 CustomerStates Customer::getState()
@@ -127,22 +128,18 @@ void Customer::waitForMenu()
 
 void Customer::submitOrder(std::vector<Person*>* waiterList_ptr)
 {
-    // std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
-
-    // std::vector<Product*> productList = menu -> getProductList();
-
-    // std::cout << "XXXXXXXXXXXXXXXXXXX: " << productList.size() << " XXXXXXXXXXXXXXXXXXX" << std::endl;
-
-    Product* p1 = new Pizza(0, "Pizza", 20, 5, 3);
-    Product* p2 = new Drink(1, "Drink", 10, 1);
+    std::vector<Product*> productList = menu -> getProductList();
 
     std::vector<Product*> orderedProductsList;
-    orderedProductsList.push_back(p1);
-    orderedProductsList.push_back(p2);
-    // std::sample(productList.begin(), productList.end(), std::back_inserter(orderedProductsList), 2, std::mt19937{std::random_device{}()});
 
-    eatTime = orderedProductsList[0] -> getEatingTime() + orderedProductsList[1] -> getEatingTime();
-    
+    for (int i = 0; i < 2; i++)
+    {
+        int productId = rand() % productList.size();
+        orderedProductsList.push_back(productList[productId]);
+
+        eatTime += productList[productId] -> getEatingTime();
+    }
+
     TaskPayload *payload = new TaskPayload();
     payload -> setOrderedProductsList(orderedProductsList);
 
@@ -458,8 +455,6 @@ Customer::~Customer()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 int Customer::getNumberOfTasks() { return 0; }
-
 void Customer::addTask(Task* new_task) {}
-
 void Customer::doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList) {}
 /////////////////////////////////////////////////////////////////////////////////////////////////

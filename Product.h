@@ -18,6 +18,10 @@ class Product : public ProductInterface
         int getPrice();
         int getPrepareTime();
         virtual ~Product() {}
+
+        friend std::ostream& operator<<(std::ostream& os, const Product& product);
 };
     
+std::ostream& operator<<(std::ostream& os, const Product& product);
+
 #endif

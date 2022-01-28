@@ -1,9 +1,7 @@
 #ifndef PIZZA_H
 #define PIZZA_H
 
-
 #include "Product.h"
-
 
 class Pizza : public Product
 {
@@ -14,6 +12,10 @@ class Pizza : public Product
         Pizza(int new_id, std::string new_name, int new_price, int new_eatingTime, int new_prepareTime);
 
         int getEatingTime();
+
+        friend std::ostream& operator<<(std::ostream& os, const Pizza& pizza);
 };
+
+std::ostream& operator<<(std::ostream& os, const Pizza& pizza);
 
 #endif

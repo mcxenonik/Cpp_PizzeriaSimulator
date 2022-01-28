@@ -1,10 +1,11 @@
 #include "Waiter.h"
 
-Waiter::Waiter(int new_id, std::string new_name, Menu* menu):
+Waiter::Waiter(int new_id, std::string new_name, Menu* new_menu):
 Person(new_id, new_name)
 {
     tasksDoneStat = 0;
     valueOfCollectedOrdersStat = 0;
+    menu = new_menu;
 }
 
 int Waiter::getTasksDoneStat()
@@ -150,12 +151,8 @@ Waiter::~Waiter()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 void Waiter::setState(CustomerStates customerState) {}
-
 CustomerStates Waiter::getState() { return CustomerStates::NEW; }
-
 void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
-
 void Waiter::setOrderID(int newOrderId) {}
-
 void Waiter::setMenu(Menu* new_menu) {}
 /////////////////////////////////////////////////////////////////////////////////////////////////
