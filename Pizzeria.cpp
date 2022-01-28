@@ -14,11 +14,11 @@ Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers)
         addCustomer();
 }
 
-std::vector<Waiter*>* Pizzeria::getWaiterList(){
+std::vector<Person*>* Pizzeria::getWaiterList(){
     return &waiterList;
 }
 
-std::vector<Customer*>* Pizzeria::getCustomerList(){
+std::vector<Person*>* Pizzeria::getCustomerList(){
     return &customerList;
 }
 
@@ -34,11 +34,11 @@ Menu* Pizzeria::getMenu(){
     return menu;
 }
 
-Waiter* Pizzeria::getWaiterByID(int waiterID){
+Person* Pizzeria::getWaiterByID(int waiterID){
     return waiterList[waiterID];
 }
 
-Customer* Pizzeria::getCustomerByID(int customerID){
+Person* Pizzeria::getCustomerByID(int customerID){
     return customerList[customerID];
 }
 
@@ -81,7 +81,7 @@ int Pizzeria::addOrder(int customerID, int waiterID, std::vector<Product*> produ
 }
 
 void Pizzeria::decreaseOrdersTime(){
-    std::cout << "****************************************************************************************";
+    std::cout << "****************************************************************************************" << std::endl;
 
     for(auto order : orderList)
     {
@@ -102,9 +102,9 @@ void Pizzeria::decreaseOrdersTime(){
 
         std::cout << "ORDER ID:" << order -> getID() << "CUS ID:" << order -> getCustomerID() << 
                      "WAITTIME:" << order -> getWaitTime() << "IS READY:" << order -> getIsReady() << 
-                     "IS DELIVERED:" << order -> getIsDelivered();
+                     "IS DELIVERED:" << order -> getIsDelivered() << std::endl;
     }
-    std::cout << "****************************************************************************************";
+    std::cout << "****************************************************************************************" << std::endl;
 
 }
 

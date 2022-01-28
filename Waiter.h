@@ -5,7 +5,8 @@
 #include "CustomerStates.h"
 #include "TaskTypes.h"
 #include "Task.h"
-#include "Pizzeria.h"
+#include "Table.h"
+#include "Order.h"
 
 #include <vector>
 
@@ -23,12 +24,17 @@ class Waiter : public Person
         int getTasksDoneStat();
         int getValueOfCollectedOrdersStat();
 
-        int getNumberOfTasks();
-        void addTask(Task *new_task);
-        void doTask(std::vector<Customer*>* customerList_ptr, std::vector<Order*>* orderList_ptr);
+        int getNumberOfTasks() override;
+        void addTask(Task *new_task) override;
+        void doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>* orderList_ptr) override;
         void printLog(TaskTypes taskType, int customerID, int orderID);
 
         ~Waiter();
+
+        void setState(CustomerStates customerState) override;
+        CustomerStates getState() override;
+        void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) override;
+        void setOrderID(int newOrderId) override;
 };
 
 #endif

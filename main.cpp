@@ -31,7 +31,7 @@ int main()
 
         for (auto customer_ptr : *(sim_pizzeria -> getCustomerList()))
         {
-            customer_ptr -> doAction(sim_pizzeria);
+            customer_ptr -> doAction(sim_pizzeria -> getWaiterList(), sim_pizzeria -> getTableList(), sim_pizzeria -> getOrdersList());
 
             if(customer_ptr -> getState() == CustomerStates::OUT && std::find(end_list.begin(), end_list.end(), customer_ptr -> getID()) == end_list.end())
             {

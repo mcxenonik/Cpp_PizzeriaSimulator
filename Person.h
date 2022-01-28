@@ -2,6 +2,12 @@
 #define PERSON_H
 
 #include "PersonInterface.h"
+#include "Task.h"
+#include "Order.h"
+#include "CustomerStates.h"
+#include "Table.h"
+
+#include <vector>
 
 class Person : public PersonInterface
 {
@@ -14,8 +20,16 @@ class Person : public PersonInterface
 
         int getID();
         std::string getName();
-    
-        virtual ~Person() {}
+
+        virtual ~Person();
+
+        virtual int getNumberOfTasks();
+        virtual void addTask(Task* new_task);
+        virtual void doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList);
+        virtual void setState(CustomerStates customerState);
+        virtual CustomerStates getState();
+        virtual void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList);
+        virtual void setOrderID(int newOrderId);
 };
     
 #endif

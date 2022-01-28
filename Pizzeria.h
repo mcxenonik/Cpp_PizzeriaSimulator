@@ -12,8 +12,8 @@
 class Pizzeria
 {
     private:
-        std::vector<Waiter*> waiterList;
-        std::vector<Customer*> customerList;
+        std::vector<Person*> waiterList;
+        std::vector<Person*> customerList;
         std::vector<Table*> tableList;
         std::vector<Order*> orderList;
         Menu* menu;
@@ -21,14 +21,14 @@ class Pizzeria
     public:
         Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers);
 
-        std::vector<Waiter*>* getWaiterList();
-        std::vector<Customer*>* getCustomerList();
+        std::vector<Person*>* getWaiterList();
+        std::vector<Person*>* getCustomerList();
         std::vector<Table*>* getTableList();
         std::vector<Order*>* getOrdersList();
         Menu* getMenu();
 
-        Waiter* getWaiterByID(int waiterID);
-        Customer* getCustomerByID(int customerID);
+        Person* getWaiterByID(int waiterID);
+        Person* getCustomerByID(int customerID);
         Table* getTableByID(int tableID);
         Order* getOrderByID(int orderID);
         Product* getProductByID(int productID);

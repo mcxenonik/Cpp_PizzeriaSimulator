@@ -59,6 +59,19 @@ void Customer::setState(CustomerStates new_state)
     state = new_state;
 }
 
+Person* Customer::findMinTaskWaiter(std::vector<Person*>* waiterList_ptr){
+    int min_tasks = (*waiterList_ptr)[0] -> getNumberOfTasks();
+    int waiterID = (*waiterList_ptr)[0] -> getID();
+
+    for(auto waiter : (*waiterList_ptr)){
+        if (waiter -> getNumberOfTasks() < min_tasks){
+            min_tasks = waiter -> getNumberOfTasks();
+            waiterID = waiter -> getID();
+        }
+    }
+    return (*waiterList_ptr)[waiterID];
+}
+
 bool Customer::takeTable(std::vector<Table*>* tableList_ptr)
 {
     for(auto table_ptr : *tableList_ptr)
@@ -90,7 +103,7 @@ void Customer::waitForFreeTable()
     waitingTimeStat++;
 }
 
-void Customer::orderMenu(std::vector<Waiter*>* waiterList_ptr)
+void Customer::orderMenu(std::vector<Person*>* waiterList_ptr)
 {
     // int waiterID = findMinTaskWaiter(waiterList_ptr);
     TaskPayload *payload = new TaskPayload();
@@ -107,26 +120,26 @@ void Customer::waitForMenu()
     waitingTimeStat++;
 }
 
-void Customer::submitOrder(std::vector<Waiter*>* waiterList_ptr)
+void Customer::submitOrder(std::vector<Person*>* waiterList_ptr)
 {
-    // int waiterID = findMinTaskWaiter();
+    // // int waiterID = findMinTaskWaiter();
 
-    std::vector<Product*> productList = simulated_pizzeria -> getMenu() -> getProductList();
+    // std::vector<Product*> productList = simulated_pizzeria -> getMenu() -> getProductList();
 
-    std::vector<Product*> orderedProductsList;
-    orderedProductsList.push_back(productList[0]);
-    orderedProductsList.push_back(productList[1]);
-    // std::sample(productList.begin(), productList.end(), std::back_inserter(orderedProductsList), 2, std::mt19937{std::random_device{}()});
+    // std::vector<Product*> orderedProductsList;
+    // orderedProductsList.push_back(productList[0]);
+    // orderedProductsList.push_back(productList[1]);
+    // // std::sample(productList.begin(), productList.end(), std::back_inserter(orderedProductsList), 2, std::mt19937{std::random_device{}()});
 
-    eatTime = orderedProductsList[0] -> getEatingTime() + orderedProductsList[1] -> getEatingTime();
+    // eatTime = orderedProductsList[0] -> getEatingTime() + orderedProductsList[1] -> getEatingTime();
     
-    TaskPayload *payload = new TaskPayload();
-    payload -> setOrderedProductsList(orderedProductsList);
+    // TaskPayload *payload = new TaskPayload();
+    // payload -> setOrderedProductsList(orderedProductsList);
 
-    Task *new_task = new Task(ID, TaskTypes::CO, payload);
+    // Task *new_task = new Task(ID, TaskTypes::CO, payload);
 
-    findMinTaskWaiter(waiterList_ptr) -> addTask(new_task);
-    // simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
+    // findMinTaskWaiter(waiterList_ptr) -> addTask(new_task);
+    // // simulated_pizzeria -> getWaiterByID(waiterID) -> addTask(new_task);
 
 }
 
@@ -145,7 +158,7 @@ void Customer::eat()
     eatTime--;
 }
 
-void Customer::askForBill(std::vector<Waiter*>* waiterList_ptr)
+void Customer::askForBill(std::vector<Person*>* waiterList_ptr)
 {
     // int waiterID = findMinTaskWaiter();
 
@@ -164,7 +177,7 @@ void Customer::waitForBill()
     waitingTimeStat++;
 }
 
-void Customer::takeBill(std::vector<Waiter*>* waiterList_ptr)
+void Customer::takeBill(std::vector<Person*>* waiterList_ptr)
 {
     // int waiterID = findMinTaskWaiter();
 
@@ -197,7 +210,7 @@ void Customer::out(std::vector<Table*>* tableList_ptr)
     tableID = 0;
 }
 
-void Customer::doAction(std::vector<Waiter*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr)
+void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr)
 {
     switch(state)
     {
@@ -439,19 +452,16 @@ void Customer::printLog(bool result, int totalPrice)
     }
 }
 
-Customer::~Customer() 
+Customer::~Customer()
 {
+
 }
 
-Waiter* Customer::findMinTaskWaiter(std::vector<Waiter*>* waiterList_ptr){
-    int min_tasks = (*waiterList_ptr)[0] -> getNumberOfTasks();
-    int waiterID = (*waiterList_ptr)[0] -> getID();
 
-    for(auto waiter : (*waiterList_ptr)){
-        if (waiter -> getNumberOfTasks() < min_tasks){
-            min_tasks = waiter -> getNumberOfTasks();
-            waiterID = waiter -> getID();
-        }
-    }
-    return (*waiterList_ptr)[waiterID];
-}
+/////////////////////////////////////////////////////////////////////////////////////////////////
+int Customer::getNumberOfTasks() { return 0; }
+
+void Customer::addTask(Task* new_task) {}
+
+void Customer::doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList) {}
+/////////////////////////////////////////////////////////////////////////////////////////////////

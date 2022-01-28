@@ -29,7 +29,7 @@ void Waiter::addTask(Task *new_task)
     taskQueue.push_back(new_task);
 }
 
-void Waiter::doTask(std::vector<Customer*>* customerList_ptr, std::vector<Order*>* orderList_ptr)
+void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>* orderList_ptr)
 {
     if(taskQueue.size() == 0)
     {
@@ -122,27 +122,27 @@ void Waiter::printLog(TaskTypes taskType, int customerId, int orderID)
     switch(taskType)
     {
         case TaskTypes::GM:
-            std::cout << "KELNER:" << ID << "PODAJE KARTE DAN KLIENTOWI:" << customerId;
+            std::cout << "KELNER:" << ID << "PODAJE KARTE DAN KLIENTOWI:" << customerId << std::endl;
             break;
 
         case TaskTypes::CO:
-            std::cout << "KELNER:" << ID << "ODBIERA ZAMOWIENIE:" << orderID << "OD KLIENTA:" << customerId;
+            std::cout << "KELNER:" << ID << "ODBIERA ZAMOWIENIE:" << orderID << "OD KLIENTA:" << customerId << std::endl;
             break;
 
         case TaskTypes::DO:
-            std::cout << "KELNER:" << ID << "DOSTARCZA ZAMOWIENIE:" << orderID << "DO KLIENTA:" << customerId;
+            std::cout << "KELNER:" << ID << "DOSTARCZA ZAMOWIENIE:" << orderID << "DO KLIENTA:" << customerId << std::endl;
             break;
 
         case TaskTypes::GR:
-            std::cout << "KELNER:" << ID << "PODAJE RACHUNEK DO ZAMOWIENIA:" << orderID << "KLIENTOWI:" << customerId;
+            std::cout << "KELNER:" << ID << "PODAJE RACHUNEK DO ZAMOWIENIA:" << orderID << "KLIENTOWI:" << customerId << std::endl;
             break;
 
         case TaskTypes::TR:
-            std::cout << "KELNER:" << ID << "POBIERA OPLATE DO ZAMOWIENIA:" << orderID << "OD KLIENTA:" << customerId;
+            std::cout << "KELNER:" << ID << "POBIERA OPLATE DO ZAMOWIENIA:" << orderID << "OD KLIENTA:" << customerId << std::endl;
             break;
 
         case TaskTypes::FR:
-            std::cout << "KELNER:" << ID << "OCZEKUJE NA ZADANIE";
+            std::cout << "KELNER:" << ID << "OCZEKUJE NA ZADANIE" << std::endl;
             break;
     }
 }
@@ -154,3 +154,14 @@ Waiter::~Waiter()
         delete task_ptr;
     }
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+void Waiter::setState(CustomerStates customerState) {}
+
+CustomerStates Waiter::getState() { return CustomerStates::NEW; }
+
+void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
+
+void Waiter::setOrderID(int newOrderId) {}
+/////////////////////////////////////////////////////////////////////////////////////////////////
