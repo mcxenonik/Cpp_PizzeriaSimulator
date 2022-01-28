@@ -1,8 +1,6 @@
 #include "Waiter.h"
-#include "Task.h"
-#include "TaskTypes.h"
 
-Waiter::Waiter(int new_id, std::string new_name):
+Waiter::Waiter(int new_id, std::string new_name, Menu* menu):
 Person(new_id, new_name)
 {
     tasksDoneStat = 0;
@@ -50,7 +48,8 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
         case TaskTypes::GM:
         {
             (*customerList_ptr)[customerId] -> setState(CustomerStates::SO);
-            // sim_pizzeria -> getCustomerByID(customerId)->setState(CustomerStates::SO);
+            
+            (*customerList_ptr)[customerId] -> setMenu(menu);
 
             printLog(taskType, customerId, 0);
             break;
@@ -60,15 +59,12 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
             std::vector<Product*> orderedProductsList = task -> getTaskPayload() -> getOrderedProductsList();
 
             (*customerList_ptr)[customerId] -> setState(CustomerStates::WFPO);
-            // sim_pizzeria -> getCustomerByID(customerId) -> setState(CustomerStates::WFPO);
 
             Order* new_order = new Order((*orderList_ptr).size(), customerId, ID, orderedProductsList);
             (*orderList_ptr).push_back(new_order);
             int orderID = new_order -> getID();
-            // int orderID = sim_pizzeria -> addOrder(customerId, ID, orderedProductsList);
 
             (*customerList_ptr)[customerId] -> setOrderID(orderID);
-            // sim_pizzeria -> getCustomerByID(customerId) -> setOrderID(orderID);
 
             valueOfCollectedOrdersStat += orderedProductsList[0] -> getPrice() + orderedProductsList[1] -> getPrice();
 
@@ -80,7 +76,6 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
             int orderID = task -> getTaskPayload() -> getOrderID();
             
             (*customerList_ptr)[customerId] -> setState(CustomerStates::E);
-            // sim_pizzeria->getCustomerByID(customerId)->setState(CustomerStates::E);
 
             printLog(taskType, customerId, orderID);
             break;
@@ -90,10 +85,8 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
             int orderID = task -> getTaskPayload() -> getOrderID();
 
             (*customerList_ptr)[customerId] -> setState(CustomerStates::TB);
-            // sim_pizzeria -> getCustomerByID(customerId) -> setState(CustomerStates::TB);
 
             (*orderList_ptr)[orderID] -> createReceipt();
-            // sim_pizzeria -> getOrderByID(orderID) -> createReceipt();
 
             printLog(taskType, customerId, orderID);
             break;
@@ -103,7 +96,6 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
             int orderID = task -> getTaskPayload() -> getOrderID();
 
             (*customerList_ptr)[customerId] -> setState(CustomerStates::PB);
-            // sim_pizzeria -> getCustomerByID(customerId) -> setState(CustomerStates::PB);
 
             printLog(taskType, customerId, orderID);
             break;
@@ -164,4 +156,6 @@ CustomerStates Waiter::getState() { return CustomerStates::NEW; }
 void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
 
 void Waiter::setOrderID(int newOrderId) {}
+
+void Waiter::setMenu(Menu* new_menu) {}
 /////////////////////////////////////////////////////////////////////////////////////////////////

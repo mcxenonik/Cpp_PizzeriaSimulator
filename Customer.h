@@ -26,6 +26,7 @@ class Customer : public Person
         int orderID;
         int eatTime;
         int waitingTimeStat;
+        Menu* menu;
 
         bool takeTable(std::vector<Table*>* tableList_ptr);
         void waitForFreeTable();
@@ -59,6 +60,7 @@ class Customer : public Person
         void setOrderID(int new_orderID) override;
         void setEatTime(int new_eatTime);
         void setState(CustomerStates new_state) override;
+        void setMenu(Menu* new_menu) override;
 
         void doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr) override;
 

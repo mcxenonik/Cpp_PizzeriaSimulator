@@ -55,7 +55,7 @@ Product* Pizzeria::getProductByID(int productID){
 }
 
 void Pizzeria::addWaiter(){
-    Waiter* new_waiter = new Waiter(waiterList.size(), "SimpleWaiterName");
+    Waiter* new_waiter = new Waiter(waiterList.size(), "SimpleWaiterName", menu);
 
     waiterList.push_back(new_waiter);
 }
@@ -100,9 +100,9 @@ void Pizzeria::decreaseOrdersTime(){
         }
         
 
-        std::cout << "ORDER ID:" << order -> getID() << "CUS ID:" << order -> getCustomerID() << 
-                     "WAITTIME:" << order -> getWaitTime() << "IS READY:" << order -> getIsReady() << 
-                     "IS DELIVERED:" << order -> getIsDelivered() << std::endl;
+        std::cout << "ORDER ID: " << order -> getID() << " CUS ID: " << order -> getCustomerID() << 
+                     " WAITTIME: " << order -> getWaitTime() << " IS READY: " << order -> getIsReady() << 
+                     " IS DELIVERED: " << order -> getIsDelivered() << std::endl;
     }
     std::cout << "****************************************************************************************" << std::endl;
 

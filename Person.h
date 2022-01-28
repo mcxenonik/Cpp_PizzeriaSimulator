@@ -6,6 +6,7 @@
 #include "Order.h"
 #include "CustomerStates.h"
 #include "Table.h"
+#include "Menu.h"
 
 #include <vector>
 
@@ -30,6 +31,7 @@ class Person : public PersonInterface
         virtual CustomerStates getState();
         virtual void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList);
         virtual void setOrderID(int newOrderId);
+        virtual void setMenu(Menu* newMenu);
 };
     
 #endif

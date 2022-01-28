@@ -7,6 +7,7 @@
 #include "Task.h"
 #include "Table.h"
 #include "Order.h"
+#include "Menu.h"
 
 #include <vector>
 
@@ -16,10 +17,11 @@ class Waiter : public Person
         std::vector<Task*> taskQueue;
         int tasksDoneStat;
         int valueOfCollectedOrdersStat;
+        Menu* menu;
         
         
     public:
-        Waiter(int new_id, std::string new_name);
+        Waiter(int new_id, std::string new_name, Menu* new_menu);
 
         int getTasksDoneStat();
         int getValueOfCollectedOrdersStat();
@@ -35,6 +37,7 @@ class Waiter : public Person
         CustomerStates getState() override;
         void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) override;
         void setOrderID(int newOrderId) override;
+        void setMenu(Menu* newMenu) override;
 };
 
 #endif
