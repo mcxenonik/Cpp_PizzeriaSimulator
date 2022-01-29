@@ -22,11 +22,12 @@ class Customer : public Person
     private:
         CustomerStates state;
         int groupID;
-        int tableID;
+        Table* table;
         Order* order;
+        Menu* menu;
         int eatTime;
         int waitingTimeStat;
-        Menu* menu;
+        
 
         bool takeTable(std::vector<Table*>* tableList_ptr);
         void waitForFreeTable();
@@ -41,7 +42,7 @@ class Customer : public Person
         void takeBill(std::vector<Person*>* waiterList_ptr);
         void waitForPayBill();
         void payBill();
-        void out(std::vector<Table*>* tableList_ptr);
+        void out();
 
         Person* findMinTaskWaiter(std::vector<Person*>* waiterList_ptr);
         
@@ -51,12 +52,12 @@ class Customer : public Person
 
         CustomerStates getState() override;
         int getGroupID();
-        int getTableID();
+        Table* getTable();
         Order* getOrder();
         int getEatTime();
         int getWaitingTimeState();
 
-        void setTableID(int new_tableID);
+        void setTable(Table* new_table);
         void setOrder(Order* new_order) override;
         void setEatTime(int new_eatTime);
         void setState(CustomerStates new_state) override;

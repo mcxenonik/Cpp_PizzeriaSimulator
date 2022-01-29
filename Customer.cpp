@@ -12,6 +12,7 @@ Person(new_id, new_name)
     waitingTimeStat = 0;
     menu = nullptr;
     order = nullptr;
+    table = nullptr;
 }
 
 CustomerStates Customer::getState()
@@ -24,9 +25,9 @@ int Customer::getGroupID()
     return groupID;
 }
 
-int Customer::getTableID()
+Table* Customer::getTable()
 {
-    return tableID;
+    return table;
 }
 
 Order* Customer::getOrder()
@@ -44,9 +45,9 @@ int Customer::getWaitingTimeState()
     return waitingTimeStat;
 }
 
-void Customer::setTableID(int new_tableID)
+void Customer::setTable(Table* new_table)
 {
-    tableID = new_tableID;
+    table = new_table;
 }
 
 void Customer::setOrder(Order* new_order)
@@ -89,7 +90,7 @@ bool Customer::takeTable(std::vector<Table*>* tableList_ptr)
         if (table_ptr -> getGroupID() == groupID && !table_ptr -> getIsFull())
         {
             table_ptr -> addCustomerToTable(ID, groupID);
-            tableID = table_ptr -> getID();
+            table = table_ptr;
             return true;
         }
     }
@@ -99,7 +100,7 @@ bool Customer::takeTable(std::vector<Table*>* tableList_ptr)
         if (table_ptr -> getGroupID() == 0)
         {
             table_ptr -> addCustomerToTable(ID, groupID);
-            tableID = table_ptr -> getID();
+            table = table_ptr;
             return true;
         }
     }
@@ -200,10 +201,9 @@ void Customer::payBill()
     order -> setPaid();
 }
 
-void Customer::out(std::vector<Table*>* tableList_ptr)
+void Customer::out()
 {
-    (*tableList_ptr)[tableID] -> deleteCustomerFromTable(ID);
-    tableID = 0;
+    table -> deleteCustomerFromTable(ID);
 }
 
 void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr)
@@ -338,7 +338,7 @@ void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*
         }
         case CustomerStates::OUT:
         {
-            out(tableList_ptr);
+            out();
 
             printLog(true, 0);
             state = CustomerStates::OUT;
@@ -357,7 +357,7 @@ void Customer::printLog(bool result, int totalPrice)
         {
             if (result)
             {
-                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " ZAJMUJE STOLIK: " << tableID << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " ZAJMUJE STOLIK: " << table -> getID() << std::endl;
             }
             else
             {
@@ -368,13 +368,13 @@ void Customer::printLog(bool result, int totalPrice)
         }
         case CustomerStates::OM:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " ZAMOWIL KARTE DAN" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " ZAMOWIL KARTE DAN" << std::endl;
 
             break;
         }
         case CustomerStates::WFM:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA KARTE DAN" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " OCZEKUJE NA KARTE DAN" << std::endl;
 
             break;
         }
@@ -386,13 +386,13 @@ void Customer::printLog(bool result, int totalPrice)
         }
         case CustomerStates::WFAO:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA PRZYJECIE ZAMOWIENIA" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " OCZEKUJE NA PRZYJECIE ZAMOWIENIA" << std::endl;
 
             break;
         }
         case CustomerStates::WFPO:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA PRZYGOTOWANIE ZAMOWIENIA" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " OCZEKUJE NA PRZYGOTOWANIE ZAMOWIENIA" << std::endl;
 
             break;
         }
@@ -400,48 +400,48 @@ void Customer::printLog(bool result, int totalPrice)
         {
             if (eatTime != 0)
             {
-                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " SPOZYWA ZAMOWIENIE. POZOSTALO: " << eatTime << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " SPOZYWA ZAMOWIENIE. POZOSTALO: " << eatTime << std::endl;
             }
             else
             {
-                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " SKONCZYL SPOZYWANIE ZAMOWIENIA" << std::endl;
+                std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " SKONCZYL SPOZYWANIE ZAMOWIENIA" << std::endl;
             }
 
             break;
         }
         case CustomerStates::AFB:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << ID << " SIEDZACY PRZY STOLIKU: " << tableID << " POPROSIL O RACHUNEK" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << ID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " POPROSIL O RACHUNEK" << std::endl;
 
             break;
         }
         case CustomerStates::WFB:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY:" << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA RACHUNEK" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY:" << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " OCZEKUJE NA RACHUNEK" << std::endl;
 
             break;
         }
         case CustomerStates::TB:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " BIERZE RACHUNEK O WARTOSCI: " << totalPrice << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " BIERZE RACHUNEK O WARTOSCI: " << totalPrice << std::endl;
 
             break;
         }
         case CustomerStates::WFPB:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " OCZEKUJE NA POBRANIE OPLATY" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " OCZEKUJE NA POBRANIE OPLATY" << std::endl;
 
             break;
         }
         case CustomerStates::PB:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " PLACI RACHUNEK O WARTOSCI: " << totalPrice << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " PLACI RACHUNEK O WARTOSCI: " << totalPrice << std::endl;
 
             break;
         }
         case CustomerStates::OUT:
         {
-            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << tableID << " ODCHODZI" << std::endl;
+            std::cout << "KLIENT: " << ID << " Z GRUPY: " << groupID << " SIEDZACY PRZY STOLIKU: " << table -> getID() << " ODCHODZI" << std::endl;
 
             break;
         }
