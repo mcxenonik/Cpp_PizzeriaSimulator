@@ -14,9 +14,9 @@ class Simulation
         int numberOfWaiters;
         int numberOfCustomers;
 
-        int startTime;
+        int startTimeHour;
         int minutes;
-        int step;
+        int simulationStep;
 
     public:
         Simulation(std::string simulation_parameters_file_name, std::string products_data_file_name);

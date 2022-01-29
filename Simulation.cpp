@@ -1,6 +1,7 @@
 #include "Simulation.h"
 
 #include "CustomerStates.h"
+#include <fstream>
 #include <vector>
 #include <algorithm>
 #include <unistd.h>
@@ -8,13 +9,39 @@
 
 Simulation::Simulation(std::string simulation_parameters_file_name, std::string products_data_file_name)
 {
-    numberOfTables = 1;
-    numberOfWaiters = 1;
-    numberOfCustomers = 1;
+    std::ifstream filestream(simulation_parameters_file_name);
 
-    startTime = 8;
-    minutes = 0;
-    step = 1;
+    std::string parameter_name;
+    int parameter_value;
+
+    while (filestream >> parameter_name >> parameter_value)
+    {
+        if (parameter_name == "numberOfTables")
+        {
+            numberOfTables = parameter_value;
+        }
+        else if (parameter_name == "numberOfWaiters")
+        {
+            numberOfWaiters = parameter_value;
+        }
+        else if (parameter_name == "numberOfCustomers")
+        {
+            numberOfCustomers = parameter_value;
+        }
+        else if (parameter_name == "startTimeHour")
+        {
+            startTimeHour = parameter_value;
+        }
+        else if (parameter_name == "minutes")
+        {
+            minutes = parameter_value;
+        }
+        else if (parameter_name == "simulationStep")
+        {
+            simulationStep = parameter_value;
+        }
+            
+    };
 
     srand(time(NULL));
 
@@ -26,7 +53,7 @@ void Simulation::runSimulation()
     bool run_sim = true;
     std::vector<int> end_list;
 
-    std::cout << "START SIMULATION" << std::endl << startTime << ":" << minutes << std::endl;
+    std::cout << "START SIMULATION" << std::endl << startTimeHour << ":" << minutes << std::endl;
     std::cout << "========================================================================================" << std::endl;
 
     while(run_sim)
@@ -56,16 +83,16 @@ void Simulation::runSimulation()
         simulatedPizzeria -> decreaseOrdersTime();
 
 
-        minutes += step;
+        minutes += simulationStep;
 
         if (minutes >= 60)
         {
             minutes -= 60;
-            startTime += 1;
+            startTimeHour += 1;
         }
 
         std::cout << "========================================================================================" << std::endl;
-        std::cout << "CZAS: " << startTime << ":" << minutes << std::endl << "WYSZLO KLIENTOW: " << end_list.size() << std::endl;
+        std::cout << "CZAS: " << startTimeHour << ":" << minutes << std::endl << "WYSZLO KLIENTOW: " << end_list.size() << std::endl;
         std::cout << "========================================================================================" << std::endl;
         
         if (!run_sim)
@@ -79,7 +106,7 @@ void Simulation::runSimulation()
             // simulatedPizzeria -> countMinMaxWaiterValueOfCollectedOrdersStat();
         }
 
-        sleep(step);
+        sleep(simulationStep);
     };
 }
 
