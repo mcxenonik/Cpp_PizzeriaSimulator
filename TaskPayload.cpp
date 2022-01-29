@@ -2,7 +2,7 @@
 
 TaskPayload::TaskPayload()
 {
-
+    order = nullptr;
 }
 
 std::vector<Product*> TaskPayload::getOrderedProductsList()

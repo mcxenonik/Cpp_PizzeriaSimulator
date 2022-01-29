@@ -10,14 +10,12 @@ enum class CustomerStates
     WFAO = 5,                // Wait for accept order
     WFPO = 6,                // Wait for prepare order
     E = 7,                   // Eat
-    AFB = 8,                 // Ask for Bill
-    WFB = 9,                 // Wait for bill
-    TB = 10,                 // Take bill
-    WFPB = 11,               // Wait for pay bill
-    PB = 12,                 // Pay bill
+    AFR = 8,                 // Ask for Receipt
+    WFR = 9,                 // Wait for Receipt
+    TR = 10,                 // Take Receipt
+    WFPR = 11,               // Wait for pay Receipt
+    PR = 12,                 // Pay Receipt
     OUT = 13                 // Come out
-
-
 };
 
 #endif

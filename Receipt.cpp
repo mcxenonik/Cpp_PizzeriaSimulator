@@ -8,20 +8,7 @@ Receipt::Receipt(int new_orderID, std::vector<Product*> new_productList)
     isPaid = false;    
     totalPrice = 0;
     
-    for (auto product_ptr : new_productList)
-    {
-        productList.push_back(product_ptr);
-    }
-
-    countPrice();
-}
-
-void Receipt::countPrice()
-{
-    for (auto product_ptr : productList)
-    {
-        totalPrice += product_ptr -> getPrice();
-    }
+    setProducts(new_productList);
 }
 
 int Receipt::getID()
@@ -47,6 +34,16 @@ void Receipt::paidReceipt()
 int Receipt::getTotalPrice()
 {
     return totalPrice;
+}
+
+void Receipt::setProducts(std::vector<Product*> new_productList)
+{
+    for (auto product_ptr : new_productList)
+    {
+        productList.push_back(product_ptr);
+
+        totalPrice += product_ptr -> getPrice();
+    }
 }
 
 Receipt::~Receipt()

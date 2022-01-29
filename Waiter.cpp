@@ -90,7 +90,7 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
         {
             int orderID = task -> getTaskPayload() -> getOrder() -> getID();
 
-            (*customerList_ptr)[customerId] -> setState(CustomerStates::TB);
+            (*customerList_ptr)[customerId] -> setState(CustomerStates::TR);
 
             task -> getTaskPayload() -> getOrder() -> createReceipt();
 
@@ -101,7 +101,7 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
         {
             int orderID = task -> getTaskPayload() -> getOrder() -> getID();
 
-            (*customerList_ptr)[customerId] -> setState(CustomerStates::PB);
+            (*customerList_ptr)[customerId] -> setState(CustomerStates::PR);
 
             printLog(taskType, customerId, orderID);
             break;

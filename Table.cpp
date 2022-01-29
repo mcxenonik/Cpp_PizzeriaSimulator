@@ -23,11 +23,6 @@ int Table::getGroupID()
     return groupID;
 }
 
-std::list<int> Table::getCustomersIDList()
-{
-    return customersIDList;
-}
-
 void Table::addCustomerToTable(int customerID, int customerGroupID)
 {
     customersIDList.push_back(customerID);

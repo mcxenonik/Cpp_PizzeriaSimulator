@@ -18,7 +18,6 @@ class Table
         int getID();
         bool getIsFull();
         int getGroupID();
-        std::list<int> getCustomersIDList();
 
         void addCustomerToTable(int customerID, int customerGroupID);
         void deleteCustomerFromTable(int customerID);

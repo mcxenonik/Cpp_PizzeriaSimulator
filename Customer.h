@@ -28,25 +28,23 @@ class Customer : public Person
         int eatTime;
         int waitingTimeStat;
         
+        Person* findMinTaskWaiter(std::vector<Person*>* waiterList_ptr);
 
         bool takeTable(std::vector<Table*>* tableList_ptr);
-        void waitForFreeTable();
         void orderMenu(std::vector<Person*>* waiterList_ptr);
-        void waitForMenu();
         void submitOrder(std::vector<Person*>* waiterList_ptr);
-        void waitForAcceptOrder();
+        void askForReceipt(std::vector<Person*>* waiterList_ptr);
+        void takeReceipt(std::vector<Person*>* waiterList_ptr);
         void waitForPrepareOrder();
+        void waitForAcceptOrder();
+        void waitForPayReceipt();
+        void waitForFreeTable();
+        void waitForReceipt();
+        void waitForMenu();
+        void payReceipt();
         void eat();
-        void askForBill(std::vector<Person*>* waiterList_ptr);
-        void waitForBill();
-        void takeBill(std::vector<Person*>* waiterList_ptr);
-        void waitForPayBill();
-        void payBill();
         void out();
-
-        Person* findMinTaskWaiter(std::vector<Person*>* waiterList_ptr);
-        
-        
+  
     public:
         Customer(int new_id, std::string new_name, int new_groupID);
 

@@ -1,7 +1,7 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
 
-#include "productInterface.h"
+#include "ProductInterface.h"
 
 class Product : public ProductInterface
 {

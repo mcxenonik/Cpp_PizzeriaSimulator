@@ -19,13 +19,11 @@ class Waiter : public Person
         int valueOfCollectedOrdersStat;
         Menu* menu;
         
-        
     public:
         Waiter(int new_id, std::string new_name, Menu* new_menu);
 
         int getTasksDoneStat();
         int getValueOfCollectedOrdersStat();
-
         int getNumberOfTasks() override;
         void addTask(Task *new_task) override;
         void doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>* orderList_ptr) override;

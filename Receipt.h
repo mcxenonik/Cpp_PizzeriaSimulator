@@ -13,14 +13,17 @@ class Receipt
         std::vector<Product*> productList;
         int totalPrice;
 
-        void countPrice();
+        void setProducts(std::vector<Product*> new_productList);
+
     public:
         Receipt(int new_orderID, std::vector<Product*> new_productList);
+
         int getID();
         int getOrderID();
         bool getIsPaid();
         void paidReceipt();
         int getTotalPrice();
+
         ~Receipt();
 };
 
