@@ -194,7 +194,7 @@ void Customer::waitForPayBill()
     waitingTimeStat++;
 }
 
-void Customer::payBill(std::vector<Order*>* orderList_ptr)
+void Customer::payBill()
 {
     order -> getReceipt() -> paidReceipt();
     order -> setPaid();
@@ -206,7 +206,7 @@ void Customer::out(std::vector<Table*>* tableList_ptr)
     tableID = 0;
 }
 
-void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr)
+void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr)
 {
     switch(state)
     {
@@ -329,7 +329,7 @@ void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*
         }
         case CustomerStates::PB:
         {
-            payBill(orderList_ptr);
+            payBill();
 
             printLog(true, order -> getReceipt() -> getTotalPrice());
             state = CustomerStates::OUT;

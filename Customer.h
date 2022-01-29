@@ -40,7 +40,7 @@ class Customer : public Person
         void waitForBill();
         void takeBill(std::vector<Person*>* waiterList_ptr);
         void waitForPayBill();
-        void payBill(std::vector<Order*>* orderList_ptr);
+        void payBill();
         void out(std::vector<Table*>* tableList_ptr);
 
         Person* findMinTaskWaiter(std::vector<Person*>* waiterList_ptr);
@@ -62,7 +62,7 @@ class Customer : public Person
         void setState(CustomerStates new_state) override;
         void setMenu(Menu* new_menu) override;
 
-        void doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr, std::vector<Order*>* orderList_ptr) override;
+        void doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr) override;
 
         void printLog(bool result, int totalPrice);
 

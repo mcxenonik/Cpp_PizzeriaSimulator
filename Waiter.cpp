@@ -152,7 +152,7 @@ Waiter::~Waiter()
 /////////////////////////////////////////////////////////////////////////////////////////////////
 void Waiter::setState(CustomerStates customerState) {}
 CustomerStates Waiter::getState() { return CustomerStates::NEW; }
-void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
+void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) {}
 void Waiter::setOrder(Order* newOrder) {}
 void Waiter::setMenu(Menu* newMenu) {}
 /////////////////////////////////////////////////////////////////////////////////////////////////

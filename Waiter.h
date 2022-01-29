@@ -35,7 +35,7 @@ class Waiter : public Person
 
         void setState(CustomerStates customerState) override;
         CustomerStates getState() override;
-        void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) override;
+        void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) override;
         void setOrder(Order* newOrder) override;
         void setMenu(Menu* newMenu) override;
 };

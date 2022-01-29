@@ -31,7 +31,7 @@ void Person::setState(CustomerStates customerState) {}
 
 CustomerStates Person::getState() { return CustomerStates::NEW; }
 
-void Person::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
+void Person::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) {}
 
 void Person::setOrder(Order* newOrder) {}
 
