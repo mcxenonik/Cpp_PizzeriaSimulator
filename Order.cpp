@@ -9,14 +9,8 @@ Order::Order(int new_id, int new_customerID, int new_waiterID, std::vector<Produ
     isDelivered = false;
     isPaid = false;
     waitTime = 0;
-    // productList  = new_productList;
 
-    for (auto product_ptr : new_productList)
-    {
-        productList.push_back(product_ptr);
-    }
-
-    setWaitTime();
+    setProducts(new_productList);
 }
 
 int Order::getID()
@@ -29,11 +23,6 @@ int Order::getCustomerID()
     return customerID;
 }
 
-int Order:: getWaiterID()
-{
-    return waiterID;
-}
-
 bool Order::getIsReady()
 {
     return isReady;
@@ -42,16 +31,6 @@ bool Order::getIsReady()
 bool Order::getIsDelivered()
 {
     return isDelivered;
-}
-
-bool Order::getIsPaid()
-{
-    return isPaid;
-}
-
-std::vector<Product*> Order::getProductList()
-{
-    return productList;
 }
 
 int Order::getWaitTime()
@@ -72,7 +51,6 @@ void Order::setPaid()
 void Order::createReceipt()
 {
     receipt = new Receipt(ID, productList);
-    std::cout << "RACHUNEK: " << receipt->getTotalPrice() << " DO ZAMOWIENIA: " << ID << std::endl;
 }
 
 void Order::setIsDelivered(bool new_isDelivered)
@@ -80,17 +58,15 @@ void Order::setIsDelivered(bool new_isDelivered)
     isDelivered = new_isDelivered;
 }
 
-void Order::setWaiterID(int new_waiterID)
+void Order::setProducts(std::vector<Product*> new_productList)
 {
-    waiterID = new_waiterID;
-}
-
-void Order::setWaitTime()
-{
-    for (auto product_ptr : productList)
+    for (auto product_ptr : new_productList)
     {
-        waitTime += product_ptr->getPrepareTime();
+        productList.push_back(product_ptr);
+
+        waitTime += product_ptr -> getPrepareTime();
     }
+
     if (waitTime == 0)
     {
         isReady = true;

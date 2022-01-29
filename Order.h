@@ -18,24 +18,23 @@ class Order
         int waitTime;
         std::vector<Product*> productList;
         Receipt *receipt;
-        void setWaitTime();
+
+        void setProducts(std::vector<Product*> new_productList);
         
     public:
         Order(int new_id, int new_customerID, int new_waiterID, std::vector<Product*> new_productList);
-        int  getID();
+
+        int getID();
         int getCustomerID();
-        int getWaiterID();
         bool getIsReady();
         bool getIsDelivered();
-        bool getIsPaid();
-        std::vector<Product*> getProductList();
         int getWaitTime();
         Receipt* getReceipt();
         void setPaid();
         void createReceipt();
         void setIsDelivered(bool isDelivered);
-        void setWaiterID(int new_waiterID);
         void decreaseWaitTime();
+
         ~Order();
 };
 

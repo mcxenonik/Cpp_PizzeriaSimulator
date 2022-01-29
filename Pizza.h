@@ -13,6 +13,8 @@ class Pizza : public Product
 
         int getEatingTime();
 
+        ~Pizza();
+
         friend std::ostream& operator<<(std::ostream& os, const Pizza& pizza);
 };
 

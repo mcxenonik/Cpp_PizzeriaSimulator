@@ -15,7 +15,6 @@ class Menu
         Menu();
 
         std::vector<Product*> getProductList();
-        Product* getProductByID(int productID);
 
         ~Menu();
 };

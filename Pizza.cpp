@@ -19,3 +19,7 @@ std::ostream& operator<<(std::ostream& os, const Pizza& pizza)
     return os;
 }
 
+Pizza::~Pizza()
+{
+    
+}

@@ -27,6 +27,20 @@
 		"prepareTime": "3",
 		"eatingTime": "2"
 	},
+	"Kebab": {
+		"name": "Kebab",
+		"type": "Dish",
+		"price": "20",
+		"prepareTime": "5",
+		"eatingTime": "4"
+	},
+	"Salad": {
+		"name": "Salad",
+		"type": "Dish",
+		"price": "15",
+		"prepareTime": "3",
+		"eatingTime": "3"
+	},
 	"Cola": {
 		"name": "Cola",
 		"type": "Drink",

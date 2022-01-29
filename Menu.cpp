@@ -6,6 +6,7 @@
 #include "Product.h"
 #include "Pizza.h"
 #include "Drink.h"
+#include "Dish.h"
 #include <list>
 #include <string>
 
@@ -17,12 +18,12 @@ Menu::Menu()
 void Menu::createMenu()
 {
     using json = nlohmann::json;
-    std::ifstream i("products_data.json");
-    json j;
-    i >> j;
+    std::ifstream filestream("products_data.json");
+    json jsonFile;
+    filestream >> jsonFile;
     
     Product *newProduct;
-    for (json::iterator it = j.begin(); it != j.end(); ++it) 
+    for (json::iterator it = jsonFile.begin(); it != jsonFile.end(); ++it) 
     {
         if((*it)["type"] == "Pizza")
         {
@@ -32,6 +33,10 @@ void Menu::createMenu()
         {
             newProduct = new Drink(productList.size(), (*it)["name"], std::stoi(std::string((*it)["price"])), std::stoi(std::string((*it)["drinkingTime"])));
         }
+        else if((*it)["type"] == "Dish")
+        {
+            newProduct = new Dish(productList.size(), (*it)["name"], std::stoi(std::string((*it)["price"])), std::stoi(std::string((*it)["eatingTime"])), std::stoi(std::string((*it)["prepareTime"])));
+        }
         
         productList.push_back(newProduct);
     }
@@ -40,11 +45,6 @@ void Menu::createMenu()
 std::vector<Product*> Menu::getProductList()
 {
     return productList;
-}
-
-Product* Menu::getProductByID(int productID)
-{
-    return productList[productID];
 }
 
 Menu::~Menu()

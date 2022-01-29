@@ -18,3 +18,8 @@ std::ostream& operator<<(std::ostream& os, const Drink& drink)
     os << drink.ID << " | " << drink.name << " | " << drink.price << std::endl;
     return os;
 }
+
+Drink::~Drink()
+{
+    
+}
