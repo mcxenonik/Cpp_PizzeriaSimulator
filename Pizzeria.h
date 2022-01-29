@@ -25,13 +25,6 @@ class Pizzeria
         std::vector<Person*>* getCustomerList();
         std::vector<Table*>* getTableList();
         std::vector<Order*>* getOrdersList();
-        Menu* getMenu();
-
-        Person* getWaiterByID(int waiterID);
-        Person* getCustomerByID(int customerID);
-        Table* getTableByID(int tableID);
-        Order* getOrderByID(int orderID);
-        Product* getProductByID(int productID);
         
         void addWaiter();
         void addCustomer();

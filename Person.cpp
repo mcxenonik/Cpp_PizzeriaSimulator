@@ -23,16 +23,16 @@ Person::~Person()
 
 int Person::getNumberOfTasks() { return 0; }
 
-void Person::addTask(Task* new_task) {}
+void Person::addTask(Task*) {}
 
-void Person::doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList) {}
+void Person::doTask(std::vector<Person*>*, std::vector<Order*>*) {}
 
-void Person::setState(CustomerStates customerState) {}
+void Person::setState(CustomerStates) {}
 
 CustomerStates Person::getState() { return CustomerStates::NEW; }
 
-void Person::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) {}
+void Person::doAction(std::vector<Person*>*, std::vector<Table*>*) {}
 
-void Person::setOrder(Order* newOrder) {}
+void Person::setOrder(Order*) {}
 
-void Person::setMenu(Menu* new_menu) {}
+void Person::setMenu(Menu*) {}

@@ -30,30 +30,6 @@ std::vector<Order*>* Pizzeria::getOrdersList(){
     return &orderList;
 }
 
-Menu* Pizzeria::getMenu(){
-    return menu;
-}
-
-Person* Pizzeria::getWaiterByID(int waiterID){
-    return waiterList[waiterID];
-}
-
-Person* Pizzeria::getCustomerByID(int customerID){
-    return customerList[customerID];
-}
-
-Table* Pizzeria::getTableByID(int tableID){
-    return tableList[tableID];
-}
-
-Order* Pizzeria::getOrderByID(int orderID){
-    return orderList[orderID];
-}
-
-Product* Pizzeria::getProductByID(int productID){
-    return menu -> getProductByID(productID);
-}
-
 void Pizzeria::addWaiter(){
     Waiter* new_waiter = new Waiter(waiterList.size(), "SimpleWaiterName", menu);
 
@@ -92,7 +68,7 @@ void Pizzeria::decreaseOrdersTime(){
 
             Task* new_task = new Task(order -> getCustomerID(), TaskTypes::DO, payload);
             findMinTaskWaiter()-> addTask(new_task);
-            getOrderByID(order -> getID()) -> setIsDelivered(true);
+            order -> setIsDelivered(true);
         }
         else if (!order -> getIsReady()) 
         {

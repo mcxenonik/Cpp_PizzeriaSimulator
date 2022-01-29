@@ -28,6 +28,12 @@ void Waiter::addTask(Task *new_task)
     taskQueue.push_back(new_task);
 }
 
+void Waiter::setState(CustomerStates) {}
+CustomerStates Waiter::getState() { return CustomerStates::NEW; }
+void Waiter::doAction(std::vector<Person*>*, std::vector<Table*>*) {}
+void Waiter::setOrder(Order*) {}
+void Waiter::setMenu(Menu*) {}
+
 void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>* orderList_ptr)
 {
     if(taskQueue.size() == 0)
@@ -145,10 +151,3 @@ Waiter::~Waiter()
 {
 
 }
-
-
-void Waiter::setState(CustomerStates customerState) {}
-CustomerStates Waiter::getState() { return CustomerStates::NEW; }
-void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) {}
-void Waiter::setOrder(Order* newOrder) {}
-void Waiter::setMenu(Menu* newMenu) {}

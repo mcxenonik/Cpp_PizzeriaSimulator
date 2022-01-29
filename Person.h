@@ -25,13 +25,13 @@ class Person : public PersonInterface
         virtual ~Person();
 
         virtual int getNumberOfTasks();
-        virtual void addTask(Task* new_task);
-        virtual void doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList);
-        virtual void setState(CustomerStates customerState);
+        virtual void addTask(Task*);
+        virtual void doTask(std::vector<Person*>*, std::vector<Order*>*);
+        virtual void setState(CustomerStates);
         virtual CustomerStates getState();
-        virtual void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList);
-        virtual void setOrder(Order* newOrder);
-        virtual void setMenu(Menu* newMenu);
+        virtual void doAction(std::vector<Person*>*, std::vector<Table*>*);
+        virtual void setOrder(Order*);
+        virtual void setMenu(Menu*);
 };
     
 #endif

@@ -20,44 +20,14 @@ CustomerStates Customer::getState()
     return state;
 }
 
-int Customer::getGroupID()
-{
-    return groupID;
-}
-
-Table* Customer::getTable()
-{
-    return table;
-}
-
-Order* Customer::getOrder()
-{
-    return order;
-}
-
-int Customer::getEatTime()
-{
-    return eatTime;
-}
-
 int Customer::getWaitingTimeState()
 {
     return waitingTimeStat;
 }
 
-void Customer::setTable(Table* new_table)
-{
-    table = new_table;
-}
-
 void Customer::setOrder(Order* new_order)
 {
     order = new_order;
-}
-
-void Customer::setEatTime(int new_eatTime)
-{
-    eatTime = new_eatTime;
 }
 
 void Customer::setState(CustomerStates new_state)
@@ -69,6 +39,10 @@ void Customer::setMenu(Menu* new_menu)
 {
     menu = new_menu;
 }
+
+int Customer::getNumberOfTasks() { return 0; }
+void Customer::addTask(Task*) {}
+void Customer::doTask(std::vector<Person*>*, std::vector<Order*>*) {}
 
 Person* Customer::findMinTaskWaiter(std::vector<Person*>* waiterList_ptr){
     int min_tasks = (*waiterList_ptr)[0] -> getNumberOfTasks();
@@ -452,8 +426,3 @@ Customer::~Customer()
 {
 
 }
-
-
-int Customer::getNumberOfTasks() { return 0; }
-void Customer::addTask(Task* new_task) {}
-void Customer::doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList) {}

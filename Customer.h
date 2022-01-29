@@ -50,19 +50,11 @@ class Customer : public Person
     public:
         Customer(int new_id, std::string new_name, int new_groupID);
 
-        CustomerStates getState() override;
-        int getGroupID();
-        Table* getTable();
-        Order* getOrder();
-        int getEatTime();
         int getWaitingTimeState();
-
-        void setTable(Table* new_table);
+        CustomerStates getState() override;
         void setOrder(Order* new_order) override;
-        void setEatTime(int new_eatTime);
         void setState(CustomerStates new_state) override;
         void setMenu(Menu* new_menu) override;
-
         void doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*>* tableList_ptr) override;
 
         void printLog(bool result, int totalPrice);
@@ -70,8 +62,8 @@ class Customer : public Person
         ~Customer();
 
         int getNumberOfTasks() override;
-        void addTask(Task* new_task) override;
-        void doTask(std::vector<Person*>* newPersonList, std::vector<Order*>* newOrderList) override;
+        void addTask(Task*) override;
+        void doTask(std::vector<Person*>*, std::vector<Order*>*) override;
 };
 
 #endif

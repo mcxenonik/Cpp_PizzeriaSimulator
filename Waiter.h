@@ -29,15 +29,16 @@ class Waiter : public Person
         int getNumberOfTasks() override;
         void addTask(Task *new_task) override;
         void doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>* orderList_ptr) override;
+
         void printLog(TaskTypes taskType, int customerID, int orderID);
 
         ~Waiter();
 
-        void setState(CustomerStates customerState) override;
+        void setState(CustomerStates) override;
         CustomerStates getState() override;
-        void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) override;
-        void setOrder(Order* newOrder) override;
-        void setMenu(Menu* newMenu) override;
+        void doAction(std::vector<Person*>*, std::vector<Table*>*) override;
+        void setOrder(Order*) override;
+        void setMenu(Menu*) override;
 };
 
 #endif
