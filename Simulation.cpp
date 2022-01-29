@@ -4,8 +4,9 @@
 #include <vector>
 #include <algorithm>
 #include <unistd.h>
+#include <ctime>
 
-Simulation::Simulation(std::string filename)
+Simulation::Simulation(std::string simulation_parameters_file_name, std::string products_data_file_name)
 {
     numberOfTables = 1;
     numberOfWaiters = 1;
@@ -17,7 +18,7 @@ Simulation::Simulation(std::string filename)
 
     srand(time(NULL));
 
-    simulatedPizzeria = new Pizzeria(numberOfTables, numberOfWaiters, numberOfCustomers); 
+    simulatedPizzeria = new Pizzeria(numberOfTables, numberOfWaiters, numberOfCustomers, products_data_file_name); 
 }
 
 void Simulation::runSimulation()

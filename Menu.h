@@ -8,10 +8,10 @@ class Menu
 {
     private: 
         std::vector<Product*> productList;
-        void createMenu();
+        void createMenu(std::string products_data_file_name);
 
     public:
-        Menu();
+        Menu(std::string products_data_file_name);
 
         std::vector<Product*> getProductList();
 

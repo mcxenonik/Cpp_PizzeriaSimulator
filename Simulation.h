@@ -19,7 +19,7 @@ class Simulation
         int step;
 
     public:
-        Simulation(std::string filename);
+        Simulation(std::string simulation_parameters_file_name, std::string products_data_file_name);
 
         void runSimulation();
 

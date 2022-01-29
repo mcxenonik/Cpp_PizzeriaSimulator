@@ -10,15 +10,15 @@
 #include <fstream>
 #include <string>
 
-Menu::Menu()
+Menu::Menu(std::string products_data_file_name)
 {
-    createMenu();
+    createMenu(products_data_file_name);
 }
 
-void Menu::createMenu()
+void Menu::createMenu(std::string products_data_file_name)
 {
     using json = nlohmann::json;
-    std::ifstream filestream("products_data.json");
+    std::ifstream filestream(products_data_file_name);
     json jsonFile;
     filestream >> jsonFile;
     
