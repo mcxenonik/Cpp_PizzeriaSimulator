@@ -1,8 +1,8 @@
 #include "Pizzeria.h"
 
-Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers, std::string products_data_file_name)
+Pizzeria::Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers, std::vector<Product*> menuProductsList)
 {
-    menu = new Menu(products_data_file_name);
+    menu = new Menu(menuProductsList);
 
     for(int i = 0; i < numOfTables; i++)
         addTable();

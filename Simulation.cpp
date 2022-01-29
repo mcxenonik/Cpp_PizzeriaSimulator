@@ -1,5 +1,7 @@
 #include "Simulation.h"
 
+#include "FileReader.h"
+
 #include "CustomerStates.h"
 #include <fstream>
 #include <vector>
@@ -9,43 +11,58 @@
 
 Simulation::Simulation(std::string simulation_parameters_file_name, std::string products_data_file_name)
 {
-    std::ifstream filestream(simulation_parameters_file_name);
+    // std::ifstream filestream(simulation_parameters_file_name);
 
-    std::string parameter_name;
-    int parameter_value;
+    // std::string parameter_name;
+    // int parameter_value;
 
-    while (filestream >> parameter_name >> parameter_value)
-    {
-        if (parameter_name == "numberOfTables")
-        {
-            numberOfTables = parameter_value;
-        }
-        else if (parameter_name == "numberOfWaiters")
-        {
-            numberOfWaiters = parameter_value;
-        }
-        else if (parameter_name == "numberOfCustomers")
-        {
-            numberOfCustomers = parameter_value;
-        }
-        else if (parameter_name == "startTimeHour")
-        {
-            startTimeHour = parameter_value;
-        }
-        else if (parameter_name == "minutes")
-        {
-            minutes = parameter_value;
-        }
-        else if (parameter_name == "simulationStep")
-        {
-            simulationStep = parameter_value;
-        }
+    // while (filestream >> parameter_name >> parameter_value)
+    // {
+    //     if (parameter_name == "numberOfTables")
+    //     {
+    //         numberOfTables = parameter_value;
+    //     }
+    //     else if (parameter_name == "numberOfWaiters")
+    //     {
+    //         numberOfWaiters = parameter_value;
+    //     }
+    //     else if (parameter_name == "numberOfCustomers")
+    //     {
+    //         numberOfCustomers = parameter_value;
+    //     }
+    //     else if (parameter_name == "startTimeHour")
+    //     {
+    //         startTimeHour = parameter_value;
+    //     }
+    //     else if (parameter_name == "minutes")
+    //     {
+    //         minutes = parameter_value;
+    //     }
+    //     else if (parameter_name == "simulationStep")
+    //     {
+    //         simulationStep = parameter_value;
+    //     }
             
-    };
+    // };
+
+    FileReader* fileReader = new FileReader();
+
+    std::vector<int> parameters = fileReader -> readSimulationParameters(simulation_parameters_file_name);
+    std::vector<Product*> productsList = fileReader -> readProductsData(products_data_file_name);
+
+    delete fileReader;
+
+    numberOfTables = parameters[0];
+    numberOfWaiters = parameters[1];
+    numberOfCustomers = parameters[2];
+    startTimeHour = parameters[3];
+    minutes = parameters[4];
+    simulationStep = parameters[5];
+
 
     srand(time(NULL));
 
-    simulatedPizzeria = new Pizzeria(numberOfTables, numberOfWaiters, numberOfCustomers, products_data_file_name); 
+    simulatedPizzeria = new Pizzeria(numberOfTables, numberOfWaiters, numberOfCustomers, productsList); 
 }
 
 void Simulation::runSimulation()

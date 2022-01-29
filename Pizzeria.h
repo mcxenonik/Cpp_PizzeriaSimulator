@@ -19,7 +19,7 @@ class Pizzeria
         Menu* menu;
 
     public:
-        Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers, std::string products_data_file_name);
+        Pizzeria(int numOfTables, int numOfWaiters, int numOfCustomers, std::vector<Product*> menuProductsList);
 
         std::vector<Person*>* getWaiterList();
         std::vector<Person*>* getCustomerList();

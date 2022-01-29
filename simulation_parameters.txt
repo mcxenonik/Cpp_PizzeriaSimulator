@@ -1,6 +1,6 @@
-numberOfTables 3
-numberOfWaiters 2
-numberOfCustomers 5
-startTimeHour 9
-minutes 39
-simulationStep 2
+numberOfTables 4
+numberOfWaiters 3
+numberOfCustomers 6
+startTimeHour 10
+minutes 11
+simulationStep 1
