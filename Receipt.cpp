@@ -12,13 +12,15 @@ Receipt::Receipt(int new_orderID, std::vector<Product*> new_productList)
     {
         productList.push_back(product_ptr);
     }
+
+    countPrice();
 }
 
 void Receipt::countPrice()
 {
     for (auto product_ptr : productList)
     {
-        totalPrice += product_ptr->getPrice();
+        totalPrice += product_ptr -> getPrice();
     }
 }
 

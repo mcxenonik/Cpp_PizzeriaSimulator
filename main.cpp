@@ -9,7 +9,7 @@ int main()
 {
     int numOfTables = 2;
     int numOfWaiters = 2;
-    int numOfCustomers = 4;
+    int numOfCustomers = 2;
 
     int startTime = 8;
     int minutes = 0;
