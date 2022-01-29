@@ -34,7 +34,6 @@ class Pizzeria
         Person* findMinTaskWaiter();
 
         ~Pizzeria();
-
 };
 
 #endif
