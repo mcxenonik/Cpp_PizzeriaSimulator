@@ -26,18 +26,23 @@ std::vector<int> FileReader::readSimulationParameters(std::string simulation_par
         parametersList.push_back(parameter_value);
     };
 
+    filestream.close();
+
     return parametersList;
 }
 
 std::vector<Product*> FileReader::readProductsData(std::string products_data_file_name)
 {
-    using json = nlohmann::json;
-    std::ifstream filestream(products_data_file_name);
-    json jsonFile;
-    filestream >> jsonFile;
     
+    std::ifstream filestream(products_data_file_name);
+
+    using json = nlohmann::json;
+    json jsonFile;
+
     std::vector<Product*> productList;
     Product *newProduct;
+
+    filestream >> jsonFile;
 
     for (json::iterator it = jsonFile.begin(); it != jsonFile.end(); ++it) 
     {
@@ -56,6 +61,8 @@ std::vector<Product*> FileReader::readProductsData(std::string products_data_fil
         
         productList.push_back(newProduct);
     }
+
+    filestream.close();
 
     return productList;
 }

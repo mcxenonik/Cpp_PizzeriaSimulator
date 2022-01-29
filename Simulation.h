@@ -2,6 +2,7 @@
 #define SIMULATION_H
 
 #include "Pizzeria.h"
+#include "FileReader.h"
 
 #include <string>
 
@@ -9,6 +10,7 @@ class Simulation
 {
     private:
         Pizzeria* simulatedPizzeria;
+        FileReader* fileReader;
 
         int numberOfTables;
         int numberOfWaiters;
