@@ -51,8 +51,5 @@ int Receipt::getTotalPrice()
 
 Receipt::~Receipt()
 {
-    for (auto product_ptr : productList)
-    {
-        delete product_ptr;
-    }
+
 }

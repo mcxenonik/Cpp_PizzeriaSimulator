@@ -9,7 +9,7 @@ int main()
 {
     int numOfTables = 2;
     int numOfWaiters = 2;
-    int numOfCustomers = 2;
+    int numOfCustomers = 1;
 
     int startTime = 8;
     int minutes = 0;
@@ -17,6 +17,8 @@ int main()
 
     bool run_sim = true;
     std::vector<int> end_list;
+
+    srand(time(NULL));
 
     Pizzeria *sim_pizzeria = new Pizzeria(numOfTables, numOfWaiters, numOfCustomers);
 
@@ -75,4 +77,8 @@ int main()
 
         sleep(step);
     };
+
+    delete sim_pizzeria;
+
+    return 0;
 }

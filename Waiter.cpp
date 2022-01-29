@@ -63,7 +63,6 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
 
             Order* new_order = new Order((*orderList_ptr).size(), customerId, ID, orderedProductsList);
             (*orderList_ptr).push_back(new_order);
-            // int orderID = new_order -> getID();
 
             (*customerList_ptr)[customerId] -> setOrder(new_order);
 
@@ -108,6 +107,8 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
 
     }
 
+    delete task;
+
 }
 
 void Waiter::printLog(TaskTypes taskType, int customerId, int orderID)
@@ -142,17 +143,12 @@ void Waiter::printLog(TaskTypes taskType, int customerId, int orderID)
 
 Waiter::~Waiter() 
 {
-    for(auto task_ptr : taskQueue)
-    {
-        delete task_ptr;
-    }
+
 }
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
 void Waiter::setState(CustomerStates customerState) {}
 CustomerStates Waiter::getState() { return CustomerStates::NEW; }
 void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList) {}
 void Waiter::setOrder(Order* newOrder) {}
 void Waiter::setMenu(Menu* newMenu) {}
-/////////////////////////////////////////////////////////////////////////////////////////////////

@@ -30,8 +30,5 @@ void TaskPayload::setOrder(Order* new_order)
 
 TaskPayload::~TaskPayload()
 {
-    for(auto orderedProduct_ptr : orderedProductsList)
-    {
-        delete orderedProduct_ptr;
-    }
+
 }

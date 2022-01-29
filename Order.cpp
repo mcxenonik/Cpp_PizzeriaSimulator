@@ -107,9 +107,5 @@ void Order::decreaseWaitTime()
 }
 Order::~Order()
 {
-    for (auto product_ptr : productList)
-    {
-        delete product_ptr;
-    }
     delete receipt;
 }

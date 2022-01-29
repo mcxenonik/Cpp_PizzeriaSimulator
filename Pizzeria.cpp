@@ -91,7 +91,7 @@ void Pizzeria::decreaseOrdersTime(){
             payload -> setOrder(order);
 
             Task* new_task = new Task(order -> getCustomerID(), TaskTypes::DO, payload);
-            getWaiterByID(findMinTaskWaiter())-> addTask(new_task);
+            findMinTaskWaiter()-> addTask(new_task);
             getOrderByID(order -> getID()) -> setIsDelivered(true);
         }
         else if (!order -> getIsReady()) 
@@ -108,7 +108,7 @@ void Pizzeria::decreaseOrdersTime(){
 
 }
 
-int Pizzeria::findMinTaskWaiter(){
+Person* Pizzeria::findMinTaskWaiter(){
     int min_tasks = waiterList[0] -> getNumberOfTasks();
     int waiterID = waiterList[0] -> getID();
 
@@ -118,7 +118,8 @@ int Pizzeria::findMinTaskWaiter(){
             waiterID = waiter -> getID();
         }
     }
-    return waiterID;
+
+    return waiterList[waiterID];
 }
 
 Pizzeria::~Pizzeria() 

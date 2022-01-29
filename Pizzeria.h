@@ -38,7 +38,7 @@ class Pizzeria
         void addTable();
         int addOrder(int customerID, int waiterID, std::vector<Product*> productList);
         void decreaseOrdersTime();
-        int findMinTaskWaiter();
+        Person* findMinTaskWaiter();
 
         ~Pizzeria();
 
