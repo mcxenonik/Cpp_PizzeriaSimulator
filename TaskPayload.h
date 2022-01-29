@@ -2,6 +2,7 @@
 #define TASK_PAYLOAD_H
 
 #include "Product.h"
+#include "Order.h"
 
 #include <vector>
 
@@ -9,16 +10,16 @@ class TaskPayload
 {
     private:
         std::vector<Product*> orderedProductsList;
-        int orderID;
+        Order* order;
 
     public:
         TaskPayload();
 
         std::vector<Product*> getOrderedProductsList();
-        int getOrderID();
+        Order* getOrder();
 
         void setOrderedProductsList(std::vector<Product*> new_orderedProductsList);
-        void setOrderID(int new_orderID);
+        void setOrder(Order* new_order);
 
         ~TaskPayload();
 };

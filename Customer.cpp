@@ -11,6 +11,7 @@ Person(new_id, new_name)
     eatTime = 0;
     waitingTimeStat = 0;
     menu = nullptr;
+    order = nullptr;
 }
 
 CustomerStates Customer::getState()
@@ -28,9 +29,9 @@ int Customer::getTableID()
     return tableID;
 }
 
-int Customer::getOrderID()
+Order* Customer::getOrder()
 {
-    return orderID;
+    return order;
 }
 
 int Customer::getEatTime()
@@ -48,9 +49,9 @@ void Customer::setTableID(int new_tableID)
     tableID = new_tableID;
 }
 
-void Customer::setOrderID(int new_orderID)
+void Customer::setOrder(Order* new_order)
 {
-    orderID = new_orderID;
+    order = new_order;
 }
 
 void Customer::setEatTime(int new_eatTime)
@@ -166,7 +167,7 @@ void Customer::eat()
 void Customer::askForBill(std::vector<Person*>* waiterList_ptr)
 {
     TaskPayload *payload = new TaskPayload();
-    payload -> setOrderID(orderID);
+    payload -> setOrder(order);
 
     Task *new_task = new Task(ID, TaskTypes::GR, payload);
 
@@ -181,7 +182,7 @@ void Customer::waitForBill()
 void Customer::takeBill(std::vector<Person*>* waiterList_ptr)
 {
     TaskPayload *payload = new TaskPayload();
-    payload -> setOrderID(orderID);
+    payload -> setOrder(order);
 
     Task *new_task = new Task(ID, TaskTypes::TR, payload);
 
@@ -195,8 +196,8 @@ void Customer::waitForPayBill()
 
 void Customer::payBill(std::vector<Order*>* orderList_ptr)
 {
-    (*orderList_ptr)[orderID] -> getReceipt() -> paidReceipt();
-    (*orderList_ptr)[orderID] -> setPaid();
+    order -> getReceipt() -> paidReceipt();
+    order -> setPaid();
 }
 
 void Customer::out(std::vector<Table*>* tableList_ptr)
@@ -312,7 +313,7 @@ void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*
         {
             takeBill(waiterList_ptr);
 
-            printLog(true, (*orderList_ptr)[orderID] -> getReceipt() -> getTotalPrice());
+            printLog(true, order -> getReceipt() -> getTotalPrice());
             state = CustomerStates::WFPB;
 
             break;
@@ -330,7 +331,7 @@ void Customer::doAction(std::vector<Person*>* waiterList_ptr, std::vector<Table*
         {
             payBill(orderList_ptr);
 
-            printLog(true, (*orderList_ptr)[orderID] -> getReceipt() -> getTotalPrice());
+            printLog(true, order -> getReceipt() -> getTotalPrice());
             state = CustomerStates::OUT;
 
             break;

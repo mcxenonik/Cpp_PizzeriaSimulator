@@ -10,9 +10,9 @@ std::vector<Product*> TaskPayload::getOrderedProductsList()
     return orderedProductsList;
 }
 
-int TaskPayload::getOrderID()
+Order* TaskPayload::getOrder()
 {
-    return orderID;
+    return order;
 }
 
 void TaskPayload::setOrderedProductsList(std::vector<Product*> new_orderedProductsList)
@@ -23,9 +23,9 @@ void TaskPayload::setOrderedProductsList(std::vector<Product*> new_orderedProduc
     }
 }
 
-void TaskPayload::setOrderID(int new_orderID)
+void TaskPayload::setOrder(Order* new_order)
 {
-    orderID = new_orderID;
+    order = new_order;
 }
 
 TaskPayload::~TaskPayload()

@@ -23,7 +23,7 @@ class Customer : public Person
         CustomerStates state;
         int groupID;
         int tableID;
-        int orderID;
+        Order* order;
         int eatTime;
         int waitingTimeStat;
         Menu* menu;
@@ -52,12 +52,12 @@ class Customer : public Person
         CustomerStates getState() override;
         int getGroupID();
         int getTableID();
-        int getOrderID();
+        Order* getOrder();
         int getEatTime();
         int getWaitingTimeState();
 
         void setTableID(int new_tableID);
-        void setOrderID(int new_orderID) override;
+        void setOrder(Order* new_order) override;
         void setEatTime(int new_eatTime);
         void setState(CustomerStates new_state) override;
         void setMenu(Menu* new_menu) override;

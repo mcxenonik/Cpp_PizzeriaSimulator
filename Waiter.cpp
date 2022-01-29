@@ -63,18 +63,18 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
 
             Order* new_order = new Order((*orderList_ptr).size(), customerId, ID, orderedProductsList);
             (*orderList_ptr).push_back(new_order);
-            int orderID = new_order -> getID();
+            // int orderID = new_order -> getID();
 
-            (*customerList_ptr)[customerId] -> setOrderID(orderID);
+            (*customerList_ptr)[customerId] -> setOrder(new_order);
 
             valueOfCollectedOrdersStat += orderedProductsList[0] -> getPrice() + orderedProductsList[1] -> getPrice();
 
-            printLog(taskType, customerId, orderID);
+            printLog(taskType, customerId, new_order -> getID());
             break;
         }
         case TaskTypes::DO:
         {
-            int orderID = task -> getTaskPayload() -> getOrderID();
+            int orderID = task -> getTaskPayload() -> getOrder() -> getID();
             
             (*customerList_ptr)[customerId] -> setState(CustomerStates::E);
 
@@ -83,18 +83,18 @@ void Waiter::doTask(std::vector<Person*>* customerList_ptr, std::vector<Order*>*
         }
         case TaskTypes::GR:
         {
-            int orderID = task -> getTaskPayload() -> getOrderID();
+            int orderID = task -> getTaskPayload() -> getOrder() -> getID();
 
             (*customerList_ptr)[customerId] -> setState(CustomerStates::TB);
 
-            (*orderList_ptr)[orderID] -> createReceipt();
+            task -> getTaskPayload() -> getOrder() -> createReceipt();
 
             printLog(taskType, customerId, orderID);
             break;
         }
         case TaskTypes::TR:
         {
-            int orderID = task -> getTaskPayload() -> getOrderID();
+            int orderID = task -> getTaskPayload() -> getOrder() -> getID();
 
             (*customerList_ptr)[customerId] -> setState(CustomerStates::PB);
 
@@ -153,6 +153,6 @@ Waiter::~Waiter()
 void Waiter::setState(CustomerStates customerState) {}
 CustomerStates Waiter::getState() { return CustomerStates::NEW; }
 void Waiter::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
-void Waiter::setOrderID(int newOrderId) {}
-void Waiter::setMenu(Menu* new_menu) {}
+void Waiter::setOrder(Order* newOrder) {}
+void Waiter::setMenu(Menu* newMenu) {}
 /////////////////////////////////////////////////////////////////////////////////////////////////

@@ -88,7 +88,7 @@ void Pizzeria::decreaseOrdersTime(){
         if (order -> getIsReady() && !order -> getIsDelivered())
         {
             TaskPayload *payload = new TaskPayload();
-            payload -> setOrderID(order -> getID());
+            payload -> setOrder(order);
 
             Task* new_task = new Task(order -> getCustomerID(), TaskTypes::DO, payload);
             getWaiterByID(findMinTaskWaiter())-> addTask(new_task);

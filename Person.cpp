@@ -33,6 +33,6 @@ CustomerStates Person::getState() { return CustomerStates::NEW; }
 
 void Person::doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList) {}
 
-void Person::setOrderID(int newOrderId) {}
+void Person::setOrder(Order* newOrder) {}
 
 void Person::setMenu(Menu* new_menu) {}

@@ -30,7 +30,7 @@ class Person : public PersonInterface
         virtual void setState(CustomerStates customerState);
         virtual CustomerStates getState();
         virtual void doAction(std::vector<Person*>* newPersonList, std::vector<Table*>* newTableList, std::vector<Order*>* newOrderList);
-        virtual void setOrderID(int newOrderId);
+        virtual void setOrder(Order* newOrder);
         virtual void setMenu(Menu* newMenu);
 };
     
