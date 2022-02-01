@@ -56,9 +56,8 @@ int Pizzeria::addOrder(int customerID, int waiterID, std::vector<Product*> produ
     return new_order -> getID();
 }
 
-void Pizzeria::decreaseOrdersTime(){
-    std::cout << "****************************************************************************************" << std::endl;
-
+void Pizzeria::decreaseOrdersTime()
+{
     for(auto order : orderList)
     {
         if (order -> getIsReady() && !order -> getIsDelivered())
@@ -75,13 +74,33 @@ void Pizzeria::decreaseOrdersTime(){
             order -> decreaseWaitTime();
         }
         
-
-        std::cout << "ORDER ID: " << order -> getID() << " CUS ID: " << order -> getCustomerID() << 
-                     " WAITTIME: " << order -> getWaitTime() << " IS READY: " << order -> getIsReady() << 
-                     " IS DELIVERED: " << order -> getIsDelivered() << std::endl;
+        printLog(order);
     }
-    std::cout << "****************************************************************************************" << std::endl;
+}
 
+unsigned int Pizzeria::simulateCustomers()
+{
+    int end_counter = 0;
+
+    for (auto customer_ptr : customerList)
+    {
+        customer_ptr -> doAction(&waiterList, &tableList);
+
+        if(customer_ptr -> getState() == CustomerStates::OUT)
+        {
+            end_counter++;
+        }
+    }
+
+    return end_counter;
+}
+
+void Pizzeria::simulateWaiters()
+{
+    for (auto waiter_ptr : waiterList)
+    {
+        waiter_ptr -> doTask(&customerList, &orderList);
+    }
 }
 
 Person* Pizzeria::findMinTaskWaiter(){
@@ -96,6 +115,13 @@ Person* Pizzeria::findMinTaskWaiter(){
     }
 
     return waiterList[waiterID];
+}
+
+void Pizzeria::printLog(Order* order)
+{
+    std::cout << "ORDER ID: " << order -> getID() << " CUS ID: " << order -> getCustomerID() << 
+                 " WAITTIME: " << order -> getWaitTime() << " IS READY: " << order -> getIsReady() << 
+                 " IS DELIVERED: " << order -> getIsDelivered() << std::endl;
 }
 
 Pizzeria::~Pizzeria() 

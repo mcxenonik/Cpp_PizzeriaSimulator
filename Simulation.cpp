@@ -10,8 +10,28 @@ Simulation::Simulation(std::string simulation_parameters_file_name, std::string 
 {
     fileReader = new FileReader();
 
-    std::vector<int> parameters = fileReader -> readSimulationParameters(simulation_parameters_file_name);
-    std::vector<Product*> productsList = fileReader -> readProductsData(products_data_file_name);
+    std::vector<int> parameters;
+    std::vector<Product*> productsList;
+
+    try
+    {
+        parameters = fileReader -> readSimulationParameters(simulation_parameters_file_name);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Simulation parameters load failed!";
+        exit(1);
+    }
+
+    try
+    {
+        productsList = fileReader -> readProductsData(products_data_file_name);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Products data load failed!";
+        exit(1);
+    }
 
     numberOfTables = parameters[0];
     numberOfWaiters = parameters[1];
@@ -28,36 +48,29 @@ Simulation::Simulation(std::string simulation_parameters_file_name, std::string 
 void Simulation::runSimulation()
 {
     bool run_sim = true;
-    std::vector<int> end_list;
+    int end_counter;
 
     std::cout << "START SIMULATION" << std::endl << startTimeHour << ":" << minutes << std::endl;
     std::cout << "========================================================================================" << std::endl;
 
     while(run_sim)
     {
-        if (end_list.size() == simulatedPizzeria -> getCustomerList() -> size())
+        if (end_counter == static_cast<int>(simulatedPizzeria -> getCustomerList() -> size()))
         {
             run_sim = false;
         }
-
-        for (auto customer_ptr : *(simulatedPizzeria -> getCustomerList()))
-        {
-            customer_ptr -> doAction(simulatedPizzeria -> getWaiterList(), simulatedPizzeria -> getTableList());
-
-            if(customer_ptr -> getState() == CustomerStates::OUT && std::find(end_list.begin(), end_list.end(), customer_ptr -> getID()) == end_list.end())
-            {
-                end_list.push_back(customer_ptr -> getID());
-            }
-        }
+        
+        end_counter = simulatedPizzeria -> simulateCustomers();
 
         std::cout << "----------------------------------------------------------------------------------------" << std::endl;
 
-        for (auto waiter_ptr : *(simulatedPizzeria -> getWaiterList()))
-        {
-            waiter_ptr -> doTask(simulatedPizzeria -> getCustomerList(), simulatedPizzeria -> getOrdersList());
-        }
+        simulatedPizzeria -> simulateWaiters();
+
+        std::cout << "****************************************************************************************" << std::endl;
 
         simulatedPizzeria -> decreaseOrdersTime();
+
+        std::cout << "****************************************************************************************" << std::endl;
 
 
         minutes += simulationStep;
@@ -69,7 +82,7 @@ void Simulation::runSimulation()
         }
 
         std::cout << "========================================================================================" << std::endl;
-        std::cout << "CZAS: " << startTimeHour << ":" << minutes << std::endl << "WYSZLO KLIENTOW: " << end_list.size() << std::endl;
+        std::cout << "CZAS: " << startTimeHour << ":" << minutes << std::endl << "WYSZLO KLIENTOW: " << end_counter << std::endl;
         std::cout << "========================================================================================" << std::endl;
         
         if (!run_sim)

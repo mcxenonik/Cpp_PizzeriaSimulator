@@ -3,7 +3,7 @@
 int main(int argc, char *argv[])
 {
     if (argc != 3) {
-        std::cerr << "Program parameters are not correct!" << std::endl;
+        std::cerr << "Program parameters are incorrect!" << std::endl;
         std::cerr << "Usage: " << argv[0] << " simulation_parameters_file_name.txt " << "products_data_file_name.json" << std::endl;
 
         return 1;

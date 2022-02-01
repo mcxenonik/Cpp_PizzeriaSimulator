@@ -33,6 +33,11 @@ class Pizzeria
         void decreaseOrdersTime();
         Person* findMinTaskWaiter();
 
+        unsigned int simulateCustomers();
+        void simulateWaiters();
+
+        void printLog(Order* order);
+
         ~Pizzeria();
 };
 
